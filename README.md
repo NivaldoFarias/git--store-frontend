@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+<div id="top"></div>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/NivaldoFarias/bootstore-frontend">
+    <img src="src/assets/mywallet-logo.png" alt="Logo" width="110">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">BootStore Project | Frontend</h3>
+  <h6 align="center">WIP</h6>
+  <p align="center">
+    Web Development Project using React and Sass
+    <br />
+    <a href="https://github.com/NivaldoFarias/bootstore-frontend/tree/main/src"><strong>JSX code»</strong></a>
+    -
+    <a href="https://github.com/NivaldoFarias/bootstore-frontend/blob/main/src/index.scss"><strong>SCSS code»</strong></a>
+</div>
 
-## Available Scripts
+<!-- ![Banner](https://github.com/NivaldoFarias/mywallet-project-front/blob/main/src/assets/zaprecall-showroom.png?raw=true)
+ -->
+<!-- ABOUT THE PROJECT -->
 
-In the project directory, you can run:
+<!--
+## Requirements
 
-### `npm start`
+- General
+  - [x] Vanilla React
+  - [x] Github public Repository and page deploy
+  - [x] Commit every requirement
+- Layout
+  - [x] Mobile layout structured using given template
+- Data Componentization
+  - [x] Page elements must be componentized with React in separate files
+  - [x] Dynamic data (decks, cards, etc.) must be JS arrays or objects, and must be rendered on screen
+  - [x] Quizzes layout according to template on Figma. Upon clicking on a quizz, first screen must give place to second screen
+  - [x] Upon Clicking on "Create Quizz", first screen must give place to third screen
+- Start up
+  - [x] A home screen must be displayed on start up
+  - [x] Upon clicking the "Iniciar Recall!", the deck of cards must be displayed on screen
+- Flashcards
+  - [x] Cards must be shuffled on each playthrough
+  - [x] All flashcards must show up face-down and indexed, "hiding" the given question within
+  - [x] Upon clicking on a card, the matching question must be displayed (Bonus: card-flip animation)
+  - [x] Upon clicking the "turn card" icon, the answer must be shown
+    - [x] There should be three buttons beneath the answer: "não lembrei" (did not remember), "quase não lembrei" (almost could not remember), and "Zap!". Each must be given an assigned color: red, orange and green (respectively).
+    - [x] Right after an option is chosen, card should turn once again and return to default, with its initial display question having a corresponding line-through color and icon for status
+- Bonus (optional)
+  - Restart
+    - [x] After a round, a "Restart Recall" button should allow the user to re-play through the game without a page reload
+  - Goal of "Zaps!"
+    - [x] A input on the home screen should allow the user to determine the minimum number of "Zaps!" to be met (minimum of one). This should determine which results message the user will get
+  - Multiple Decks
+    - [x] The user should be able to choose which deck to play within a given list of different decks
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-->
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Built With
 
-### `npm test`
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![Nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- Study Playlist -->
 
-### `npm run build`
+### Study Playlist
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In this section I included all Youtube content I used or refered to while studying for this project. Keep in mind that most of these videos contain information that was not previously studied during class, which may affect some parts of the code that contain these _extras_.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<a href="https://youtube.com/playlist?list=PLoZj33I2-ANTWqU331l3ZGlZV8I7rr5ZN">![Youtube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- CONTACT -->
 
-### `npm run eject`
+### Contact
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Slack][slack-shield]][slack-url]
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=blue
+[linkedin-url]: https://www.linkedin.com/in/nivaldofarias/
+[slack-shield]: https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white
+[slack-url]: https://driventurmas.slack.com/team/U02T6V2D8D8/
