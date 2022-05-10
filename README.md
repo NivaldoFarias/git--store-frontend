@@ -6,7 +6,7 @@
     <img src="" alt="Logo" width="110">
   </a>
 
-<h3 align="center">BootStore Project | Frontend</h3>
+<h3 align="center">Git --store Project | Frontend</h3>
   <h6 align="center">WIP</h6>
   <p align="center">
     Web Development Project using React and Sass
