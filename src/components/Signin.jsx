@@ -1,16 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
+import Typewriter from "typewriter-effect";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
 
 import validateEmail from "./../utils/validateEmail.js";
 import getRandomInt from "./../utils/getRandomInt.js";
 
-import { DataContext } from "./../hooks/DataContext";
+//import { DataContext } from "./../hooks/DataContext";
 import TokenContext from "./../hooks/TokenContext";
 
-//import logo from "./../assets/mywallet-logo.png";
+import logo from "./../assets/git--store-logo.png";
 
 function Signin() {
   const [signinData, setSigninData] = useState({
@@ -19,7 +20,7 @@ function Signin() {
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const { token, setToken } = useContext(TokenContext);
-  const { data, setData } = useContext(DataContext);
+  //const { data, setData } = useContext(DataContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +34,22 @@ function Signin() {
     return (
       <>
         <figure>
-          <img src="" alt="logo" />
-          <figcaption>MyWallet</figcaption>
+          <img src={logo} alt="logo" />
+          <Typewriter
+            options={{
+              loop: true,
+            }}
+            onInit={(typewriter) => {
+              typewriter
+                .typeString("git --store")
+                .pauseFor(3000)
+                .deleteAll()
+                .typeString("auth user")
+                .pauseFor(2000)
+                .deleteAll()
+                .start();
+            }}
+          />
         </figure>
         <form
           className="form-group"
@@ -57,7 +72,7 @@ function Signin() {
             />
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>E-mail</label>
+            <label>git auth user.email</label>
           </div>
           <div className="input-group">
             <input
@@ -70,16 +85,16 @@ function Signin() {
             />
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>Password</label>
+            <label>git auth user.password</label>
           </div>
           <button className={validateSignin()} type="submit">
-            <p className={hasSubmitted ? "hidden" : ""}>Sign In</p>
+            <p className={hasSubmitted ? "hidden" : ""}>git init</p>
             <div
               id="loading-dots"
               className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
             ></div>
           </button>
-          <Link to="/signup">Not yet registered? Sign up!</Link>
+          <Link to="/signup">config new user</Link>
         </form>
       </>
     );
@@ -104,7 +119,7 @@ function Signin() {
 
       request.then((response) => {
         setToken(response.data.token);
-        setData({ ...data, user: { ...response.data.user } });
+        //setData({ ...data, user: { ...response.data.user } });
         navigate("/home");
       });
       request.catch((error) => {
@@ -134,7 +149,7 @@ function Signin() {
 
   return (
     <>
-      <main id="login-page" className="auth-pages">
+      <main id="signin-page" className="auth-pages">
         {signinPage}
       </main>
     </>

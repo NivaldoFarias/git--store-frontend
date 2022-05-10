@@ -1,22 +1,16 @@
-$primary: rgb(18, 37, 143);
+$primary: rgb(238, 38, 35);
 $dark-primary: rgb(5, 18, 95);
 $secondary: rgb(33, 158, 188);
 $alt-secondary: rgb(79, 190, 218);
 $tertiary: rgb(142, 202, 230);
 $alt-tertiary: rgb(170, 200, 243);
-$background: rgb(252, 237, 224);
+$background: rgb(21, 30, 44);
 $alt-background: rgb(255, 255, 255);
 $contrast: rgb(250, 126, 97);
 $low-contrast: rgb(251, 133, 0);
 $high-contrast: rgb(255, 183, 3);
 $bar-primary: rgb(82, 100, 174);
 $btn-shadow-color: rgb(56, 42, 138);
-
-$color-primary: rgb(76, 30, 79);
-$color-secondary: rgb(95, 72, 224);
-$color-alt-secondary: rgb(128, 142, 161);
-$color-tertiary: rgb(250, 126, 97);
-$color-alt-tertiary: rgb(253, 235, 220);
 
 $deposit-color: rgb(62, 224, 153);
 $withdrawal-color: rgb(224, 62, 133);
@@ -26,5 +20,6 @@ $default-box-shadow: -2px 7px 7px rgba(0, 0, 0, 0.15);
 $footer-box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.15);
 $default-border-radius: 8px;
 
-$descriptive-font: "Varela Round", sans-serif;
+$code-font: "JetBrains Mono", monospace;
+$default-font: "Varela Round", sans-serif;
 $lesser-info-color: rgb(177, 169, 191);

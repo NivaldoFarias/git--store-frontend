@@ -3,34 +3,36 @@
 @import "./sass/mixins";
 
 .auth-pages {
-  @include flex(column, space-evenly, center, 40px);
-  padding: 90px 36px;
+  @include flex(column, space-evenly, center, initial);
+  padding: 20px 36px;
   height: 100vh;
   width: 100vw;
+
+  font-family: $code-font;
   background-color: $background;
 
   * {
     user-select: none;
   }
   figure {
-    @include flex(column, initial, center, 25px);
+    @include flex(column, initial, center, 28px);
     height: fit-content;
     width: 100%;
 
     img {
       width: 140px;
     }
-    figcaption {
-      font-family: "Iceberg", cursive;
-      font-size: 55px;
+    .Typewriter {
+      font-size: 2rem;
+      font-weight: bold;
       text-align: center;
-      color: $primary;
+      color: white;
     }
   }
   a {
-    font-size: 0.9em;
+    font-size: 1.05rem;
     text-decoration: none;
-    color: $primary;
+    color: white;
     cursor: pointer;
     &:hover {
       filter: brightness(2);
@@ -45,10 +47,12 @@
 
   button {
     @include flex(initial, center, center, initial);
-    width: 300px;
+    margin-top: 10px;
+    width: 280px;
     height: 50px;
 
     font-size: 1.4em;
+    font-family: $code-font;
     color: white;
 
     border: none;
@@ -65,19 +69,23 @@
   }
   .input-group {
     position: relative;
-    font-family: "Lexend Deca", sans-serif;
+    font-family: $code-font;
 
     input {
       display: block;
       padding: 10px 10px 10px 5px;
       width: 300px;
 
+      letter-spacing: 1px;
+      font-family: $code-font;
       font-weight: 300;
       font-size: 17px;
 
       border: none;
       background-color: transparent;
       border-bottom: 1px solid rgb(117, 117, 117);
+
+      color: white;
     }
     input:hover {
       cursor: text;
@@ -90,20 +98,24 @@
       top: 15px;
       left: 5px;
 
-      font-size: 15px;
+      font-size: 1em;
       font-weight: 300;
 
-      color: $primary;
+      color: white;
 
       pointer-events: none;
       transition: 0.2s ease all;
+
+      span {
+        font-weight: bold;
+      }
     }
     /* active state */
     input:focus ~ label,
     input:valid ~ label {
       top: -10px;
       font-size: 14px;
-      color: $bar-primary;
+      color: $primary;
     }
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
@@ -127,7 +139,7 @@
       width: 0;
 
       content: "";
-      background: $bar-primary;
+      background: $primary;
       transition: 0.2s ease all;
     }
     .bar:before {
@@ -159,7 +171,7 @@
     }
     @keyframes input-highlighter {
       from {
-        background: $bar-primary;
+        background: $primary;
       }
       to {
         width: 0;
@@ -216,7 +228,7 @@
   height: 100vh;
   width: 100vw;
 
-  font-family: $descriptive-font;
+  font-family: $default-font;
   color: $dark-primary;
   background-color: $background;
 

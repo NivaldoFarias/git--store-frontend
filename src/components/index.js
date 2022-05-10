@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { DataProvider } from "./../hooks/DataContext";
+//import { DataProvider } from "./../hooks/DataContext";
 import { useLocalStorage } from "./../hooks/useLocalStorage";
 import TokenContext from "./../hooks/TokenContext";
 
@@ -13,14 +13,12 @@ export default function App() {
 
   return (
     <TokenContext.Provider value={{ token, setToken }}>
-      <DataProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Signin />} />
-            {/* <Route path="/signup" element={<SignUp />} /> */}
-          </Routes>
-        </BrowserRouter>
-      </DataProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Signin />} />
+          {/* <Route path="/signup" element={<SignUp />} /> */}
+        </Routes>
+      </BrowserRouter>
     </TokenContext.Provider>
   );
 }

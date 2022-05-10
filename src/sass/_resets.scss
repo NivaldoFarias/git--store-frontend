@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   outline: none !important;
-  letter-spacing: 1px;
   font-family: "Raleway", sans-serif;
   font-weight: 300;
   cursor: default;
@@ -19,7 +18,7 @@
   display: none !important;
 }
 *.disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
 }
 
