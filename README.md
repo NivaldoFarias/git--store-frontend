@@ -2,18 +2,18 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/NivaldoFarias/bootstore-frontend">
+  <a href="https://github.com/NivaldoFarias/git--store-frontend">
     <img src="" alt="Logo" width="110">
   </a>
 
-<h3 align="center">BootStore Project | Frontend</h3>
+<h3 align="center">Git --store Project | Frontend</h3>
   <h6 align="center">WIP</h6>
   <p align="center">
     Web Development Project using React and Sass
     <br />
-    <a href="https://github.com/NivaldoFarias/bootstore-frontend/tree/main/src"><strong>JSX code»</strong></a>
+    <a href="https://github.com/NivaldoFarias/git--store-frontend/tree/main/src"><strong>JSX code»</strong></a>
     -
-    <a href="https://github.com/NivaldoFarias/bootstore-frontend/blob/main/src/index.scss"><strong>SCSS code»</strong></a>
+    <a href="https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/index.scss"><strong>SCSS code»</strong></a>
 </div>
 
 <!-- ![Banner](https://github.com/NivaldoFarias/mywallet-project-front/blob/main/src/assets/zaprecall-showroom.png?raw=true)
