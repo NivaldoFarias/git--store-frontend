@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/NivaldoFarias/bootstore-frontend">
-    <img src="src/assets/mywallet-logo.png" alt="Logo" width="110">
+    <img src="" alt="Logo" width="110">
   </a>
 
 <h3 align="center">BootStore Project | Frontend</h3>
