@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
+import { IoChevronUpSharp } from "react-icons/io5";
 
 function Shell() {
-  const [input, setInput] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("user@git--store ");
   const [cart, setCart] = useState([]);
   const availableProducts = ["apple", "banana", "orange", "pear"];
 
@@ -29,16 +32,36 @@ function Shell() {
 
   return (
     <div className="shell">
-      <input
-        type="text"
-        onChange={handleChange}
-        onKeyDown={handleCommand}
-        name=""
-        id=""
-        value={input}
-      />
+      <Modal
+        className="modal"
+        portalClassName="modal-portal"
+        overlayClassName="overlay"
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+      >
+        <textarea
+          type="text"
+          onChange={handleChange}
+          onKeyDown={handleCommand}
+          className="command-shell"
+          value={input}
+        />
+        <div className="footer-bar">
+          <IoChevronUpSharp className="close-modal-btn" onClick={closeModal} />
+        </div>
+      </Modal>
+      <button onClick={openModal}>open</button>
     </div>
   );
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   function handleChange(e) {
     setInput(e.target.value);
@@ -56,7 +79,7 @@ function Shell() {
       if (functions.includes(command)) {
         availableCommands[command](commandTarget);
       }
-      setInput("");
+      setInput("user@git--store ");
     }
   }
 }

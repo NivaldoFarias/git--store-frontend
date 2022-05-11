@@ -166,34 +166,61 @@
 .modal-portal {
   position: relative;
   .modal {
-    @include flex(column, center, center, 30px);
+    @include flex(column, initial, center, 0px);
     position: absolute;
-    top: 25%;
-    left: 20px;
-    right: 20px;
+    top: 0;
+    left: 0;
 
-    padding: 30px 20px;
-    min-height: fit-content;
-    max-width: 100%;
+    min-height: 250px;
+    min-width: 100%;
 
     color: $primary;
 
+    opacity: 0.85;
     outline: none;
     overflow: hidden;
-    border-radius: 5px;
-    border: 1px solid rgb(204, 204, 204);
-    background-color: $background;
+    background-color: transparent;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 
     .close-modal-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      font-size: 1.6em;
+      color: white;
+      font-size: 2em;
       cursor: pointer;
-
       * {
         pointer-events: none;
       }
+    }
+    .command-shell {
+      @include flex(initial, center, center, initial);
+      padding: 10px;
+      height: 210px;
+      width: 100%;
+      overflow: auto;
+
+      font-family: $cmd-font;
+      font-weight: bold;
+      font-size: 0.9em;
+      cursor: text;
+      caret-color: $primary;
+      color: $tertiary;
+
+      border: none;
+      resize: none;
+      outline: none;
+      box-shadow: none;
+      appearance: none;
+      background-color: $background;
+    }
+    .footer-bar {
+      @include flex(initial, center, center, initial);
+      position: relative;
+      height: 40px;
+      width: 100%;
+
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background-color: $secondary;
     }
   }
   .overlay {
@@ -241,252 +268,6 @@
   }
   .input-group {
     font-size: 0.85em;
-  }
-}
-#home-page {
-  @include flex(column, space-evenly, center, initial);
-  padding: 0 24px;
-  height: 100vh;
-  width: 100vw;
-
-  font-family: $default-font;
-  color: $dark-primary;
-  background-color: $background;
-
-  nav {
-    @include flex(row, space-between, center, initial);
-    height: 40px;
-    width: 100%;
-
-    figure {
-      @include flex(row, initial, center, 15px);
-
-      img {
-        width: 40px;
-      }
-      figcaption {
-        padding-top: 10px;
-        width: max-content;
-        text-align: center;
-        font-size: 1.1em;
-      }
-    }
-    .icons-container {
-      @include flex(row, center, center, 15px);
-      padding-top: 3px;
-      height: 100%;
-      width: 100px;
-
-      > svg {
-        cursor: pointer;
-        * {
-          pointer-events: none;
-        }
-      }
-    }
-  }
-  footer {
-    @include flex(row, space-evenly, center, initial);
-    height: 100px;
-    width: 100%;
-  }
-  .background-container {
-    position: relative;
-    padding-bottom: 40px;
-    height: 620px;
-    width: 100%;
-
-    border-radius: 5px;
-    background-color: $alt-background;
-  }
-  .transactions-container {
-    @include flex(column, initial, center, initial);
-    position: relative;
-
-    padding: 0 5px;
-    height: 100%;
-    width: 100%;
-
-    overflow: auto;
-
-    border-radius: 5px;
-  }
-  .transaction {
-    @include flex(row, initial, center, initial);
-    position: relative;
-    padding: 10px 15px;
-    height: fit-content;
-    width: 100%;
-
-    &__header {
-      @include flex(column, initial, center, 5px);
-      height: fit-content;
-      width: 80px;
-
-      &-icon {
-        font-size: 1.8em;
-      }
-      &-date {
-        @include flex(column, space-evenly, center, 5px);
-        width: 100%;
-
-        font-size: 0.7em;
-        color: $lesser-info-color;
-      }
-      &-date__time {
-        font-size: 0.8em;
-      }
-    }
-    &__info {
-      @include flex(column, center, flex-start, 5px);
-      max-height: 85px;
-      width: 100%;
-      overflow: hidden;
-
-      &__description {
-        height: 100%;
-        width: 85%;
-
-        word-wrap: break-word;
-        font-size: 0.8em;
-        color: $lesser-info-color;
-      }
-      &__amount {
-        font-size: 1.1em;
-        font-weight: bold;
-      }
-      &__amount.deposit {
-        color: $deposit-color;
-      }
-      &__amount.withdrawal {
-        color: $withdrawal-color;
-      }
-    }
-    &__timeline {
-      @include flex(column, initial, center, initial);
-      position: relative;
-
-      margin: 0 30px;
-      height: 60px;
-      width: 2px;
-
-      .line {
-        position: absolute;
-        top: -10px;
-        left: 0;
-
-        height: 90px;
-        border-right: 2px solid lightgray;
-      }
-      .circle {
-        position: absolute;
-        top: 16px;
-        left: -5px;
-
-        width: 12px;
-        height: 12px;
-
-        border-radius: 50%;
-        border: 2px solid lightgray;
-        background-color: white;
-      }
-      .line.first-line {
-        border-image: linear-gradient(to top, lightgray 40%, rgba(lightgray, 0))
-          1 100%;
-      }
-      .line.last-line {
-        border-image: linear-gradient(
-            to bottom,
-            lightgray 2%,
-            rgba(lightgray, 0)
-          )
-          1 100%;
-      }
-    }
-    &__delete-btn {
-      position: absolute;
-      top: 25px;
-      right: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-
-      * {
-        pointer-events: none;
-      }
-    }
-  }
-  .balance-container {
-    @include flex(initial, center, center, initial);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    padding-top: 6px;
-    height: 50px;
-    width: 100%;
-
-    font-size: 1.9em;
-    box-shadow: $footer-box-shadow;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: white;
-
-    &__balance {
-      letter-spacing: 2px;
-      font-weight: 300;
-      color: $primary;
-
-      span {
-        font-size: 0.8em;
-      }
-    }
-  }
-  .action-container {
-    @include flex(row, space-evenly, center, initial);
-    position: relative;
-    height: 80px;
-    width: 100%;
-
-    border-radius: 5px;
-    background-color: $primary;
-
-    button {
-      @include flex(initial, center, center, initial);
-      height: 80px;
-      width: 80px;
-
-      font-size: 1.1em;
-      font-weight: bold;
-      color: white !important;
-
-      border: none;
-      outline: none;
-      cursor: pointer !important;
-      appearance: none;
-      background-color: transparent;
-
-      * {
-        pointer-events: none;
-      }
-    }
-    &__transfer {
-      height: 100px !important;
-      width: 100px !important;
-
-      border: 3px solid white !important;
-      border-radius: 50%;
-      background-color: $primary !important;
-    }
-  }
-  .idle-text {
-    @include flex(column, center, center, 15px);
-    height: 100%;
-    line-height: 20px;
-
-    p {
-      text-align: center;
-      width: 85%;
-    }
   }
 }
 #loading-dots {
