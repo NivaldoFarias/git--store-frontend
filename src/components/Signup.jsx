@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import Typewriter from "typewriter-effect";
@@ -9,28 +9,20 @@ import validateEmail from "./../utils/validateEmail.js";
 import getRandomInt from "./../utils/getRandomInt.js";
 
 //import { DataContext } from "./../hooks/DataContext";
-import TokenContext from "./../hooks/TokenContext";
 
 import logo from "./../assets/git--store-logo.png";
 
-function Signin() {
-  const [signinData, setSigninData] = useState({
+function Signup() {
+  const [signupData, setSignupData] = useState({
+    name: "",
     email: "",
     password: "",
+    passwordConfirm: "",
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { token, setToken } = useContext(TokenContext);
-  //const { data, setData } = useContext(DataContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (token) {
-      //navigate("/home");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function buildSigninPage() {
+  function buildSignupPage() {
     return (
       <>
         <figure>
@@ -44,7 +36,7 @@ function Signin() {
                 .typeString("git --store")
                 .pauseFor(3000)
                 .deleteAll()
-                .typeString("auth user")
+                .typeString("create user")
                 .pauseFor(2000)
                 .deleteAll()
                 .start();
@@ -57,7 +49,7 @@ function Signin() {
             e.preventDefault();
             setHasSubmitted(true);
             setTimeout(() => {
-              handleSignin();
+              handleSignup();
             }, getRandomInt(750, 2000));
           }}
         >
@@ -65,62 +57,87 @@ function Signin() {
             <input
               className={hasSubmitted ? "disabled" : ""}
               type="text"
-              value={signinData.email}
+              value={signupData.name}
+              name="name"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git config --global user.name</label>
+          </div>
+          <div className="input-group">
+            <input
+              className={hasSubmitted ? "disabled" : ""}
+              type="text"
+              value={signupData.email}
               name="email"
               onChange={handleInputChange}
               required
             />
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>git auth user.email</label>
+            <label>git config --global user.email</label>
           </div>
           <div className="input-group">
             <input
-              className={hasSubmitted ? "disabled" : ""}
               type="password"
-              value={signinData.password}
+              value={signupData.password}
               name="password"
               onChange={handleInputChange}
               required
             />
             <span className="highlight"></span>
             <span className="bar"></span>
-            <label>git auth user.password</label>
+            <label>git config --global user.password</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              value={signupData.passwordConfirm}
+              name="passwordConfirm"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git auth --global user.password</label>
           </div>
           <button className={validateSignin()} type="submit">
-            <p className={hasSubmitted ? "hidden" : ""}>git init</p>
+            <p className={hasSubmitted ? "hidden" : ""}>git push</p>
             <div
               id="loading-dots"
               className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
             ></div>
           </button>
-          <Link to="/signup">config new user</Link>
+          <Link to="/">sign-in user</Link>
         </form>
       </>
     );
 
     function validateSignin() {
-      return signinData.email?.length > 0 &&
-        signinData.password?.length > 0 &&
-        !hasSubmitted
-        ? validateEmail(signinData.email)
+      return signupData.name?.length > 0 &&
+        signupData.email?.length > 0 &&
+        signupData.password?.length > 0 &&
+        signupData.passwordConfirm?.length > 0 &&
+        signupData.password === signupData.passwordConfirm
+        ? validateEmail(signupData.email)
         : "disabled";
     }
 
     function handleInputChange(e) {
-      setSigninData({ ...signinData, [e.target.name]: e.target.value });
+      setSignupData({ ...signupData, [e.target.name]: e.target.value });
     }
 
-    function handleSignin() {
+    function handleSignup() {
       const request = axios.post("https://localhost:5000/api/auth/sign-in", {
-        email: signinData.email,
-        password: signinData.password,
+        name: signupData.name,
+        email: signupData.email,
+        password: signupData.password,
       });
 
-      request.then((response) => {
-        setToken(response.data.token);
-        //setData({ ...data, user: { ...response.data.user } });
-        navigate("/home");
+      request.then((_res) => {
+        navigate("/");
       });
       request.catch((error) => {
         confirmAlert({
@@ -138,22 +155,24 @@ function Signin() {
 
     function resetAll() {
       setHasSubmitted(false);
-      setSigninData({
+      setSignupData({
+        name: "",
         email: "",
         password: "",
+        passwordConfirm: "",
       });
     }
   }
 
-  const signinPage = buildSigninPage();
+  const signupPage = buildSignupPage();
 
   return (
     <>
-      <main id="sign-in-page" className="auth-pages">
-        {signinPage}
+      <main id="sign-up-page" className="auth-pages">
+        {signupPage}
       </main>
     </>
   );
 }
 
-export default Signin;
+export default Signup;

@@ -6,7 +6,7 @@ import { useLocalStorage } from "./../hooks/useLocalStorage";
 import TokenContext from "./../hooks/TokenContext";
 
 import Signin from "./Signin";
-//import SignUp from "./Signup";
+import SignUp from "./Signup";
 
 export default function App() {
   const [token, setToken] = useLocalStorage("token", null);
@@ -16,7 +16,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Signin />} />
-          {/* <Route path="/signup" element={<SignUp />} /> */}
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </TokenContext.Provider>
