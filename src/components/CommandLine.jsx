@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function CommandLine(props) {
-  const { updateShell, availableCommands } = props;
+  const { updateShell, availableCommands, output } = props;
   const [input, setInput] = useState("");
   const [disabled, setDisabled] = useState(false);
   const functions = Object.keys(availableCommands);
@@ -18,6 +18,7 @@ function CommandLine(props) {
           type="text"
           className="command-line__input-field user-text"
           autoFocus={true}
+          maxLength={24}
           onChange={handleChange}
           onKeyDown={handleCommand}
           disabled={disabled}
@@ -56,7 +57,16 @@ function CommandLine(props) {
 
   const commandLine = buildCommandLine();
 
-  return <div className="command-line">{commandLine}</div>;
+  return (
+    <>
+      {output === "alert" ? (
+        <div className="command-line">
+          <span className="lesser-text">Command not found</span>
+        </div>
+      ) : null}
+      <div className="command-line">{commandLine}</div>
+    </>
+  );
 }
 
 export default CommandLine;
