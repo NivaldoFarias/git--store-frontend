@@ -2,36 +2,14 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { IoChevronUpSharp } from "react-icons/io5";
 
-function Shell() {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("user@git--store ");
-  const [cart, setCart] = useState([]);
-  const availableProducts = ["apple", "banana", "orange", "pear"];
+import CommandLine from "./CommandLine";
 
-  const availableCommands = {
-    add: (targets) => {
-      targets.forEach((target) => {
-        if (!availableProducts.includes(target)) {
-          console.log("Product not available");
-        }
-        setCart([...cart, target]);
-        console.log(`Added ${target} to the list`);
-      });
-    },
-    rm: (targets) => {
-      targets.forEach((target) => {
-        if (availableProducts.includes(target) && cart.includes(target)) {
-          console.log("Product not available");
-        }
-        setCart(cart.filter((product) => product !== target));
-        console.log(`Removed ${target} from the list`);
-      });
-    },
-  };
-  const functions = Object.keys(availableCommands);
+function Shell() {
+  const [newLine, setNewLine] = useState([false]);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="shell">
+    <div className="terminal-shell">
       <Modal
         className="modal"
         portalClassName="modal-portal"
@@ -40,13 +18,17 @@ function Shell() {
         onRequestClose={closeModal}
         ariaHideApp={false}
       >
-        <textarea
-          type="text"
-          onChange={handleChange}
-          onKeyDown={handleCommand}
-          className="command-shell"
-          value={input}
-        />
+        <div className="command-shell">
+          {newLine.map((line, index) => {
+            return (
+              <CommandLine
+                key={index}
+                output={line}
+                updateShell={updateShell}
+              />
+            );
+          })}
+        </div>
         <div className="footer-bar">
           <IoChevronUpSharp className="close-modal-btn" onClick={closeModal} />
         </div>
@@ -55,32 +37,16 @@ function Shell() {
     </div>
   );
 
+  function updateShell(output) {
+    setNewLine([...newLine, output]);
+  }
+
   function openModal() {
     setIsOpen(true);
   }
 
   function closeModal() {
     setIsOpen(false);
-  }
-
-  function handleChange(e) {
-    setInput(e.target.value);
-  }
-
-  function handleCommand(e) {
-    if (e.code === "Enter" && input !== "") {
-      const commandLine = input.split(" ");
-      if (commandLine[0] !== "git") {
-        return setInput("");
-      }
-      const command = commandLine[1];
-      const commandTarget = commandLine.slice(2);
-
-      if (functions.includes(command)) {
-        availableCommands[command](commandTarget);
-      }
-      setInput("user@git--store ");
-    }
   }
 }
 

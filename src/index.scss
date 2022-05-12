@@ -172,7 +172,7 @@
     left: 0;
 
     min-height: 250px;
-    min-width: 100%;
+    min-width: 100vw;
 
     color: $primary;
 
@@ -192,25 +192,48 @@
       }
     }
     .command-shell {
-      @include flex(initial, center, center, initial);
+      @include flex(column, initial, center, 5px);
       padding: 10px;
       height: 210px;
       width: 100%;
-      overflow: auto;
-
-      font-family: $cmd-font;
-      font-weight: bold;
-      font-size: 0.9em;
-      cursor: text;
-      caret-color: $primary;
-      color: $tertiary;
-
-      border: none;
-      resize: none;
-      outline: none;
-      box-shadow: none;
-      appearance: none;
+      overflow-y: auto;
       background-color: $background;
+    }
+    .command-line {
+      @include flex(row, flex-start, flex-start, initial);
+      width: 100%;
+
+      font-size: 0.9em;
+      font-weight: bold;
+      font-family: $cmd-font;
+      background-color: transparent;
+
+      &__input-field {
+        height: fit-content;
+        word-wrap: break-word;
+
+        cursor: text;
+        color: $contrast;
+        font-size: 1em;
+        font-weight: 400;
+        caret-color: $primary;
+
+        border: none;
+        resize: none;
+        outline: none;
+        box-shadow: none;
+        appearance: none;
+        background-color: transparent;
+      }
+      .console-text {
+        color: $tertiary;
+      }
+      .user-text {
+        color: $contrast;
+      }
+      .lesser-text {
+        color: $high-contrast;
+      }
     }
     .footer-bar {
       @include flex(initial, center, center, initial);
