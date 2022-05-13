@@ -7,6 +7,7 @@ import TokenContext from "./../hooks/TokenContext";
 
 import Signin from "./Signin";
 import SignUp from "./Signup";
+import Home from "./Home";
 
 export default function App() {
   const [token, setToken] = useLocalStorage("token", null);
@@ -17,6 +18,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Signin />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </TokenContext.Provider>

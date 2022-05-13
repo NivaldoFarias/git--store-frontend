@@ -249,251 +249,473 @@
   }
 }
 #home-page {
-  @include flex(column, space-evenly, center, initial);
-  padding: 0 24px;
-  height: 100vh;
-  width: 100vw;
+  @include flex(column, flex-start, center, 0);
+  height: 2000px; //! pra testar scroll
+  width: 100%;
+  position: relative;
+  padding-top: 100px;
 
   font-family: $default-font;
   color: $dark-primary;
   background-color: $background;
 
-  nav {
-    @include flex(row, space-between, center, initial);
-    height: 40px;
+  header {
+    @include flex(row, center, center, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-
-    figure {
-      @include flex(row, initial, center, 15px);
-
-      img {
-        width: 40px;
-      }
-      figcaption {
-        padding-top: 10px;
-        width: max-content;
-        text-align: center;
-        font-size: 1.1em;
-      }
-    }
-    .icons-container {
-      @include flex(row, center, center, 15px);
-      padding-top: 3px;
-      height: 100%;
-      width: 100px;
-
-      > svg {
-        cursor: pointer;
-        * {
-          pointer-events: none;
-        }
-      }
-    }
-  }
-  footer {
-    @include flex(row, space-evenly, center, initial);
     height: 100px;
-    width: 100%;
-  }
-  .background-container {
-    position: relative;
-    padding-bottom: 40px;
-    height: 620px;
-    width: 100%;
+    padding-top: 10px;
 
-    border-radius: 5px;
-    background-color: $alt-background;
-  }
-  .transactions-container {
-    @include flex(column, initial, center, initial);
-    position: relative;
-
-    padding: 0 5px;
-    height: 100%;
-    width: 100%;
-
-    overflow: auto;
-
-    border-radius: 5px;
-  }
-  .transaction {
-    @include flex(row, initial, center, initial);
-    position: relative;
-    padding: 10px 15px;
-    height: fit-content;
-    width: 100%;
-
-    &__header {
-      @include flex(column, initial, center, 5px);
-      height: fit-content;
-      width: 80px;
-
-      &-icon {
-        font-size: 1.8em;
-      }
-      &-date {
-        @include flex(column, space-evenly, center, 5px);
-        width: 100%;
-
-        font-size: 0.7em;
-        color: $lesser-info-color;
-      }
-      &-date__time {
-        font-size: 0.8em;
-      }
-    }
-    &__info {
-      @include flex(column, center, flex-start, 5px);
-      max-height: 85px;
-      width: 100%;
-      overflow: hidden;
-
-      &__description {
-        height: 100%;
-        width: 85%;
-
-        word-wrap: break-word;
-        font-size: 0.8em;
-        color: $lesser-info-color;
-      }
-      &__amount {
-        font-size: 1.1em;
-        font-weight: bold;
-      }
-      &__amount.deposit {
-        color: $deposit-color;
-      }
-      &__amount.withdrawal {
-        color: $withdrawal-color;
-      }
-    }
-    &__timeline {
-      @include flex(column, initial, center, initial);
-      position: relative;
-
-      margin: 0 30px;
-      height: 60px;
-      width: 2px;
-
-      .line {
-        position: absolute;
-        top: -10px;
-        left: 0;
-
-        height: 90px;
-        border-right: 2px solid lightgray;
-      }
-      .circle {
-        position: absolute;
-        top: 16px;
-        left: -5px;
-
-        width: 12px;
-        height: 12px;
-
-        border-radius: 50%;
-        border: 2px solid lightgray;
-        background-color: white;
-      }
-      .line.first-line {
-        border-image: linear-gradient(to top, lightgray 40%, rgba(lightgray, 0))
-          1 100%;
-      }
-      .line.last-line {
-        border-image: linear-gradient(
-            to bottom,
-            lightgray 2%,
-            rgba(lightgray, 0)
-          )
-          1 100%;
-      }
-    }
-    &__delete-btn {
-      position: absolute;
-      top: 25px;
-      right: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-
-      * {
-        pointer-events: none;
-      }
+    img {
+      width: 50px;
     }
   }
-  .balance-container {
-    @include flex(initial, center, center, initial);
+  
+  .Typewriter {
+    width: 150px;
+    margin-left: 10px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .banner {
+    width: 100%;
+    height: 200px;
+    background-image: url('https://referbruv.com/data/Admin/2020/5/git-jenkins-banner.png');
+    background-size: cover;
+  }
+
+  header::after {
+    content: "";
+    display: block;
     position: absolute;
     bottom: 0;
-    left: 0;
-
-    padding-top: 6px;
-    height: 50px;
+    margin-bottom: 1px;
     width: 100%;
-
-    font-size: 1.9em;
-    box-shadow: $footer-box-shadow;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    height: 1px;
     background-color: white;
-
-    &__balance {
-      letter-spacing: 2px;
-      font-weight: 300;
-      color: $primary;
-
-      span {
-        font-size: 0.8em;
-      }
-    }
   }
-  .action-container {
-    @include flex(row, space-evenly, center, initial);
-    position: relative;
-    height: 80px;
+
+  nav {
     width: 100%;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    background-color: $background;
+  }
+ 
 
+  nav div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 10px;
+  }
+
+  nav::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: white;
+  }
+
+  .nav-item {
+    min-width: 100px;
+    height: 50px;
+    margin: 0 5px;
+    background-color: rgb(26, 35, 50);
     border-radius: 5px;
-    background-color: $primary;
-
-    button {
-      @include flex(initial, center, center, initial);
-      height: 80px;
-      width: 80px;
-
-      font-size: 1.1em;
-      font-weight: bold;
-      color: white !important;
-
-      border: none;
-      outline: none;
-      cursor: pointer !important;
-      appearance: none;
-      background-color: transparent;
-
-      * {
-        pointer-events: none;
-      }
-    }
-    &__transfer {
-      height: 100px !important;
-      width: 100px !important;
-
-      border: 3px solid white !important;
-      border-radius: 50%;
-      background-color: $primary !important;
-    }
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .idle-text {
-    @include flex(column, center, center, 15px);
+
+  .menu, .cart {
+    color: #fff;
+    font-size: 30px;
+  }
+
+  aside {
+    width: 100%;
+    height: 200px;
+    background-color: antiquewhite;
+    transition: height 0.5s ease;
+    position: absolute;
+    z-index: 1;
+    top: 71px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .sidebar-item {
+    width: max-content;
+    border-bottom: 1px solid rgb(26, 35, 50);
+    margin: 10px 0;
+  }
+
+  .hidden-aside {
+    height: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .products {
+    width: 100%;
+    height: 1000px;
+    background-color: $background;
+    @include flex(column, flex-start, center, 0)
+  }
+
+  .product {
+    width: 90%;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 0 0;
+    padding: 0 20px;
+    box-shadow: 0 2px 7px 2px rgb(0 0 0 / 12%);
+  }
+
+  .product img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .product a {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00447c;
+    margin: 10px 0;
+  }
+
+  .product span {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+
+  .product button {
+    background-color: #408001;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    height: 35px;
+    margin: 10px auto;
+  }
+
+  .cart-modal {
+    width: 100%;
     height: 100%;
-    line-height: 20px;
-
-    p {
-      text-align: center;
-      width: 85%;
-    }
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+  .cart-box {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .cart-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+
+  .cart-close {
+    position: absolute;
+    font-size: 30px;
+    top: 10px;
+    right: 10px;
+  }
+
+  
+
+//   nav {
+//     @include flex(row, space-between, center, initial);
+//     height: 40px;
+//     width: 100%;
+
+//     figure {
+//       @include flex(row, initial, center, 15px);
+
+//       img {
+//         width: 40px;
+//       }
+//       figcaption {
+//         padding-top: 10px;
+//         width: max-content;
+//         text-align: center;
+//         font-size: 1.1em;
+//       }
+//     }
+//     .icons-container {
+//       @include flex(row, center, center, 15px);
+//       padding-top: 3px;
+//       height: 100%;
+//       width: 100px;
+
+//       > svg {
+//         cursor: pointer;
+//         * {
+//           pointer-events: none;
+//         }
+//       }
+//     }
+//   }
+//   footer {
+//     @include flex(row, space-evenly, center, initial);
+//     height: 100px;
+//     width: 100%;
+//   }
+//   .background-container {
+//     position: relative;
+//     padding-bottom: 40px;
+//     height: 620px;
+//     width: 100%;
+
+//     border-radius: 5px;
+//     background-color: $alt-background;
+//   }
+//   .transactions-container {
+//     @include flex(column, initial, center, initial);
+//     position: relative;
+
+//     padding: 0 5px;
+//     height: 100%;
+//     width: 100%;
+
+//     overflow: auto;
+
+//     border-radius: 5px;
+//   }
+//   .transaction {
+//     @include flex(row, initial, center, initial);
+//     position: relative;
+//     padding: 10px 15px;
+//     height: fit-content;
+//     width: 100%;
+
+//     &__header {
+//       @include flex(column, initial, center, 5px);
+//       height: fit-content;
+//       width: 80px;
+
+//       &-icon {
+//         font-size: 1.8em;
+//       }
+//       &-date {
+//         @include flex(column, space-evenly, center, 5px);
+//         width: 100%;
+
+//         font-size: 0.7em;
+//         color: $lesser-info-color;
+//       }
+//       &-date__time {
+//         font-size: 0.8em;
+//       }
+//     }
+//     &__info {
+//       @include flex(column, center, flex-start, 5px);
+//       max-height: 85px;
+//       width: 100%;
+//       overflow: hidden;
+
+//       &__description {
+//         height: 100%;
+//         width: 85%;
+
+//         word-wrap: break-word;
+//         font-size: 0.8em;
+//         color: $lesser-info-color;
+//       }
+//       &__amount {
+//         font-size: 1.1em;
+//         font-weight: bold;
+//       }
+//       &__amount.deposit {
+//         color: $deposit-color;
+//       }
+//       &__amount.withdrawal {
+//         color: $withdrawal-color;
+//       }
+//     }
+//     &__timeline {
+//       @include flex(column, initial, center, initial);
+//       position: relative;
+
+//       margin: 0 30px;
+//       height: 60px;
+//       width: 2px;
+
+//       .line {
+//         position: absolute;
+//         top: -10px;
+//         left: 0;
+
+//         height: 90px;
+//         border-right: 2px solid lightgray;
+//       }
+//       .circle {
+//         position: absolute;
+//         top: 16px;
+//         left: -5px;
+
+//         width: 12px;
+//         height: 12px;
+
+//         border-radius: 50%;
+//         border: 2px solid lightgray;
+//         background-color: white;
+//       }
+//       .line.first-line {
+//         border-image: linear-gradient(to top, lightgray 40%, rgba(lightgray, 0))
+//           1 100%;
+//       }
+//       .line.last-line {
+//         border-image: linear-gradient(
+//             to bottom,
+//             lightgray 2%,
+//             rgba(lightgray, 0)
+//           )
+//           1 100%;
+//       }
+//     }
+//     &__delete-btn {
+//       position: absolute;
+//       top: 25px;
+//       right: 8px;
+//       font-size: 1.1em;
+//       cursor: pointer;
+
+//       * {
+//         pointer-events: none;
+//       }
+//     }
+//   }
+//   .balance-container {
+//     @include flex(initial, center, center, initial);
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+
+//     padding-top: 6px;
+//     height: 50px;
+//     width: 100%;
+
+//     font-size: 1.9em;
+//     box-shadow: $footer-box-shadow;
+//     border-bottom-left-radius: 5px;
+//     border-bottom-right-radius: 5px;
+//     background-color: white;
+
+//     &__balance {
+//       letter-spacing: 2px;
+//       font-weight: 300;
+//       color: $primary;
+
+//       span {
+//         font-size: 0.8em;
+//       }
+//     }
+//   }
+//   .action-container {
+//     @include flex(row, space-evenly, center, initial);
+//     position: relative;
+//     height: 80px;
+//     width: 100%;
+
+//     border-radius: 5px;
+//     background-color: $primary;
+
+//     button {
+//       @include flex(initial, center, center, initial);
+//       height: 80px;
+//       width: 80px;
+
+//       font-size: 1.1em;
+//       font-weight: bold;
+//       color: white !important;
+
+//       border: none;
+//       outline: none;
+//       cursor: pointer !important;
+//       appearance: none;
+//       background-color: transparent;
+
+//       * {
+//         pointer-events: none;
+//       }
+//     }
+//     &__transfer {
+//       height: 100px !important;
+//       width: 100px !important;
+
+//       border: 3px solid white !important;
+//       border-radius: 50%;
+//       background-color: $primary !important;
+//     }
+//   }
+//   .idle-text {
+//     @include flex(column, center, center, 15px);
+//     height: 100%;
+//     line-height: 20px;
+
+//     p {
+//       text-align: center;
+//       width: 85%;
+//     }
+//   }
+// }
 }
+
 #loading-dots {
   /* sourced from https://codepen.io/nzbin/pen/GGrXbp?editors=1100 (modified) */
   position: relative;
