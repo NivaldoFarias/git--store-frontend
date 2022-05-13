@@ -24,7 +24,7 @@ function Signin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (token) {
       navigate("/home");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
