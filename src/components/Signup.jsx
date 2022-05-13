@@ -26,61 +26,62 @@ function Signup() {
   const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
-  function validateSignin() {
-    return signupData.name?.length > 0 &&
-      signupData.email?.length > 0 &&
-      signupData.password?.length > 0 &&
-      signupData.passwordConfirm?.length > 0 &&
-      signupData.password === signupData.passwordConfirm
-      ? validateEmail(signupData.email)
-      : "disabled";
-  }
+  function buildSignupPage() {
 
-  function handleInputChange(e) {
-    setSignupData({ ...signupData, [e.target.name]: e.target.value });
-  }
-
-  function handleSignup() {
-    const request = axios.post(`${URL}/auth/sign-up`, {
-      name: signupData.name,
-      email: signupData.email,
-      password: signupData.password,
-    });
-
-    request.then((_res) => {
-      navigate("/");
-    });
-    request.catch((error) => {
-      console.log(error)
-      confirmAlert({
-        message: `${error.response.data.message}. Please try again.`,
-        buttons: [
-          {
-            label: "OK",
-            onClick: () => null,
-          },
-        ],
+    function validateSignin() {
+      return signupData.name?.length > 0 &&
+        signupData.email?.length > 0 &&
+        signupData.password?.length > 0 &&
+        signupData.passwordConfirm?.length > 0 &&
+        signupData.password === signupData.passwordConfirm
+        ? validateEmail(signupData.email)
+        : "disabled";
+    }
+  
+    function handleInputChange(e) {
+      setSignupData({ ...signupData, [e.target.name]: e.target.value });
+    }
+  
+    function handleSignup() {
+      const request = axios.post(`${URL}/auth/sign-up`, {
+        name: signupData.name,
+        email: signupData.email,
+        password: signupData.password,
       });
-      resetAll();
-    });
-  }
+  
+      request.then((_res) => {
+        navigate("/");
+      });
+      request.catch((error) => {
+        console.log(error)
+        confirmAlert({
+          message: `${error.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: "OK",
+              onClick: () => null,
+            },
+          ],
+        });
+        resetAll();
+      });
+    }
+  
+    function resetAll() {
+      setHasSubmitted(false);
+      setSignupData({
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+      });
+    }
 
-  function resetAll() {
-    setHasSubmitted(false);
-    setSignupData({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-    });
-  }
+    return (
+      <>
+        <figure>
+          <img src={logo} alt="logo" />
 
-
-  const signupPage = (
-    <>
-      <figure>
-        <img src={logo} alt="logo" />
-        
           <Typewriter
             options={{
               loop: true,
@@ -96,78 +97,81 @@ function Signup() {
                 .start();
             }}
           />
-      </figure>
-      <form
-        className="form-group"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setHasSubmitted(true);
-          setTimeout(() => {
-            handleSignup();
-          }, getRandomInt(750, 2000));
-        }}
-      >
-        <div className="input-group">
-          <input
-            className={hasSubmitted ? "disabled" : ""}
-            type="text"
-            value={signupData.name}
-            name="name"
-            onChange={handleInputChange}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label>git config --global user.name</label>
-        </div>
-        <div className="input-group">
-          <input
-            className={hasSubmitted ? "disabled" : ""}
-            type="text"
-            value={signupData.email}
-            name="email"
-            onChange={handleInputChange}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label>git config --global user.email</label>
-        </div>
-        <div className="input-group">
-          <input
-            type="password"
-            value={signupData.password}
-            name="password"
-            onChange={handleInputChange}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label>git config --global user.password</label>
-        </div>
-        <div className="input-group">
-          <input
-            type="password"
-            value={signupData.passwordConfirm}
-            name="passwordConfirm"
-            onChange={handleInputChange}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label>git auth --global user.password</label>
-        </div>
-        <button className={validateSignin()} type="submit">
-          <p className={hasSubmitted ? "hidden" : ""}>git push</p>
-          <div
-            id="loading-dots"
-            className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
-          ></div>
-        </button>
-        <Link to="/">sign-in user</Link>
-      </form>
-    </>
-  );
+        </figure>
+        <form
+          className="form-group"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setHasSubmitted(true);
+            setTimeout(() => {
+              handleSignup();
+            }, getRandomInt(750, 2000));
+          }}
+        >
+          <div className="input-group">
+            <input
+              className={hasSubmitted ? "disabled" : ""}
+              type="text"
+              value={signupData.name}
+              name="name"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git config --global user.name</label>
+          </div>
+          <div className="input-group">
+            <input
+              className={hasSubmitted ? "disabled" : ""}
+              type="text"
+              value={signupData.email}
+              name="email"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git config --global user.email</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              value={signupData.password}
+              name="password"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git config --global user.password</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              value={signupData.passwordConfirm}
+              name="passwordConfirm"
+              onChange={handleInputChange}
+              required
+            />
+            <span className="highlight"></span>
+            <span className="bar"></span>
+            <label>git auth --global user.password</label>
+          </div>
+          <button className={validateSignin()} type="submit">
+            <p className={hasSubmitted ? "hidden" : ""}>git push</p>
+            <div
+              id="loading-dots"
+              className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
+            ></div>
+          </button>
+          <Link to="/">sign-in user</Link>
+        </form>
+      </>
+    )
+  }
+
+  const signupPage = buildSignupPage();
 
   return (
     <>
