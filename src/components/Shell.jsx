@@ -70,7 +70,11 @@ function Shell() {
     );
 
     function updateShell(type) {
-      setLineType([...lineType, type]);
+      if (type === "clear") {
+        setLineType(["clear"]);
+      } else {
+        setLineType((prevState) => [...prevState, type]);
+      }
     }
 
     function openModal() {

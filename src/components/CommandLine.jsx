@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function CommandLine(props) {
   const { updateShell, availableCommands, output } = props;
   const [input, setInput] = useState("");
   const [disabled, setDisabled] = useState(false);
   const functions = Object.keys(availableCommands);
+
+  useEffect(() => {
+    if (output === "clear") {
+      setInput("");
+      setDisabled(false);
+    }
+  }, [output]);
 
   function buildCommandLine() {
     return (
@@ -47,9 +54,11 @@ function CommandLine(props) {
             availableCommands[command](targets);
           }
           updateShell("user");
+        } else if (commandLine[0] === "clear") {
+          updateShell("clear");
         } else {
           console.log(`Unknown command`);
-          updateShell("alert");
+          updateShell("unknown");
         }
       }
     }
@@ -59,7 +68,7 @@ function CommandLine(props) {
 
   return (
     <>
-      {output === "alert" ? (
+      {output === "unknown" ? (
         <div className="command-line">
           <span className="lesser-text">Command not found</span>
         </div>
