@@ -8,7 +8,6 @@ import TokenContext from "./../hooks/TokenContext";
 
 import Signin from "./Signin";
 import SignUp from "./Signup";
-import Shell from "./Shell";
 
 export default function App() {
   const [cart, setCart] = useState([]);
@@ -21,7 +20,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/shell" element={<Shell />} />
           </Routes>
         </BrowserRouter>
       </TokenContext.Provider>
