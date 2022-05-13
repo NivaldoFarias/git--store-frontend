@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import Typewriter from "typewriter-effect";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import axios from "axios";
 
 import validateEmail from "./../utils/validateEmail.js";
@@ -35,7 +35,6 @@ function Signin() {
   }, []);
 
   function buildSigninPage() {
-
     function validateSignin() {
       return signinData.email?.length > 0 &&
         signinData.password?.length > 0 &&
@@ -147,7 +146,7 @@ function Signin() {
           <Link to="/signup">config new user</Link>
         </form>
       </>
-    )
+    );
   }
 
   const signinPage = buildSigninPage();

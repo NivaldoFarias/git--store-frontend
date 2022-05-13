@@ -4,7 +4,7 @@ import { confirmAlert } from "react-confirm-alert";
 import Typewriter from "typewriter-effect";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 import validateEmail from "./../utils/validateEmail.js";
 import getRandomInt from "./../utils/getRandomInt.js";
@@ -13,7 +13,7 @@ import getRandomInt from "./../utils/getRandomInt.js";
 
 import logo from "./../assets/git--store-logo.png";
 
-dotenv.config()
+dotenv.config();
 
 function Signup() {
   const [signupData, setSignupData] = useState({
@@ -27,7 +27,6 @@ function Signup() {
   const navigate = useNavigate();
 
   function buildSignupPage() {
-
     function validateSignin() {
       return signupData.name?.length > 0 &&
         signupData.email?.length > 0 &&
@@ -37,23 +36,23 @@ function Signup() {
         ? validateEmail(signupData.email)
         : "disabled";
     }
-  
+
     function handleInputChange(e) {
       setSignupData({ ...signupData, [e.target.name]: e.target.value });
     }
-  
+
     function handleSignup() {
       const request = axios.post(`${URL}/auth/sign-up`, {
         name: signupData.name,
         email: signupData.email,
         password: signupData.password,
       });
-  
+
       request.then((_res) => {
         navigate("/");
       });
       request.catch((error) => {
-        console.log(error)
+        console.log(error);
         confirmAlert({
           message: `${error.response.data.message}. Please try again.`,
           buttons: [
@@ -66,7 +65,7 @@ function Signup() {
         resetAll();
       });
     }
-  
+
     function resetAll() {
       setHasSubmitted(false);
       setSignupData({
@@ -168,7 +167,7 @@ function Signup() {
           <Link to="/">sign-in user</Link>
         </form>
       </>
-    )
+    );
   }
 
   const signupPage = buildSignupPage();
