@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import Typewriter from "typewriter-effect";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import dotenv from 'dotenv';
 import axios from "axios";
 
 import validateEmail from "./../utils/validateEmail.js";
@@ -13,6 +14,8 @@ import TokenContext from "./../hooks/TokenContext";
 
 import logo from "./../assets/git--store-logo.png";
 
+dotenv.config();
+
 function Signin() {
   const [signinData, setSigninData] = useState({
     email: "",
@@ -21,6 +24,7 @@ function Signin() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const { token, setToken } = useContext(TokenContext);
   //const { data, setData } = useContext(DataContext);
+  const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +35,52 @@ function Signin() {
   }, []);
 
   function buildSigninPage() {
+
+    function validateSignin() {
+      return signinData.email?.length > 0 &&
+        signinData.password?.length > 0 &&
+        !hasSubmitted
+        ? validateEmail(signinData.email)
+        : "disabled";
+    }
+
+    function handleInputChange(e) {
+      setSigninData({ ...signinData, [e.target.name]: e.target.value });
+    }
+
+    function handleSignin() {
+      const request = axios.post(`${URL}/auth/sign-in`, {
+        email: signinData.email,
+        password: signinData.password,
+      });
+
+      request.then((response) => {
+        setToken(response.data);
+        //setData({ ...data, user: { ...response.data.user } });
+        navigate("/home");
+      });
+      request.catch((error) => {
+        confirmAlert({
+          message: `${error.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: "OK",
+              onClick: () => null,
+            },
+          ],
+        });
+        resetAll();
+      });
+    }
+
+    function resetAll() {
+      setHasSubmitted(false);
+      setSigninData({
+        email: "",
+        password: "",
+      });
+    }
+
     return (
       <>
         <figure>
@@ -97,52 +147,7 @@ function Signin() {
           <Link to="/signup">config new user</Link>
         </form>
       </>
-    );
-
-    function validateSignin() {
-      return signinData.email?.length > 0 &&
-        signinData.password?.length > 0 &&
-        !hasSubmitted
-        ? validateEmail(signinData.email)
-        : "disabled";
-    }
-
-    function handleInputChange(e) {
-      setSigninData({ ...signinData, [e.target.name]: e.target.value });
-    }
-
-    function handleSignin() {
-      const request = axios.post("https://localhost:5000/api/auth/sign-in", {
-        email: signinData.email,
-        password: signinData.password,
-      });
-
-      request.then((response) => {
-        setToken(response.data.token);
-        //setData({ ...data, user: { ...response.data.user } });
-        navigate("/home");
-      });
-      request.catch((error) => {
-        confirmAlert({
-          message: `${error.response.data.message}. Please try again.`,
-          buttons: [
-            {
-              label: "OK",
-              onClick: () => null,
-            },
-          ],
-        });
-        resetAll();
-      });
-    }
-
-    function resetAll() {
-      setHasSubmitted(false);
-      setSigninData({
-        email: "",
-        password: "",
-      });
-    }
+    )
   }
 
   const signinPage = buildSigninPage();

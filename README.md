@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/NivaldoFarias/git--store-frontend">
-    <img src="" alt="Logo" width="110">
+    <img src="https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/assets/git--store-logo.png" alt="Logo" width="140">
   </a>
 
 <h3 align="center">Git --store Project | Frontend</h3>
@@ -77,8 +77,13 @@ In this section I included all Youtube content I used or refered to while studyi
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Slack][slack-shield]][slack-url]
 
+### Contributors
+
+<a href="https://github.com/NivaldoFarias/git--store-backend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=NivaldoFarias/git--store-backend" />
+</a>
+
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=blue
 [linkedin-url]: https://www.linkedin.com/in/nivaldofarias/
