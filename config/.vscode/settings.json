@@ -1,0 +1,7 @@
+{
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.withNodeModules": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.jsxSingleQuote": true
+}
