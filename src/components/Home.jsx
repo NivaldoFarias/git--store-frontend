@@ -1,49 +1,24 @@
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import dotenv from "dotenv";
-import Typewriter from "typewriter-effect";
-import { IoClose } from "react-icons/io5";
-import { FaShoppingCart, FaBars } from "react-icons/fa";
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import dotenv from 'dotenv';
+import Typewriter from 'typewriter-effect';
+import { IoClose } from 'react-icons/io5';
+import { FaShoppingCart, FaBars } from 'react-icons/fa';
 
-import Product from "./Product";
+import Product from './Product';
 
-import TokenContext from "../hooks/TokenContext";
+import { ProductsContext } from './../hooks/ProductsContext';
+import TokenContext from '../hooks/TokenContext';
 
-import logo from "./../assets/git--store-logo.png";
+import logo from './../assets/git--store-logo.png';
 
 dotenv.config();
 
-// para testes
-const teste = [
-  {
-    _id: "627db7559c8c5b30e95103bb",
-    title: "mouse gamer foda",
-    image:
-      "https://images.kabum.com.br/produtos/fotos/112948/mouse-gamer-logitech-g203-rgb-lightsync-6-botoes-8000-dpi-preto-910-005793_1612880277_g.jpg",
-    price: "R$ 129.90",
-  },
-  {
-    _id: "627db7559c8c5b30e95103bc",
-    title: "Processador Intel Core i3 2100 3.10ghz Cache 3MB LGA 1155 OEM",
-    image:
-      "https://a-static.mlcdn.com.br/1500x1500/processador-intel-core-i3-2100-3-10ghz-cache-3mb-lga-1155-oem/reibatuta3/879/7f9f0f0d1c3b03848c28aad57d22de33.jpg",
-    price: "R$ 400.00",
-  },
-  {
-    _id: "627db7559c8c5b30e95103bd",
-    title:
-      "Placa de Vídeo Zotac NVIDIA GeForce RTX 3090 Trinity, 24GB, GDDR6X - ZT-A30900D-10P",
-    image:
-      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRxBDxP3yS6r33ssbUlJ-vuV2o9RAJ2PlHSAno-XNe5eoCadObBXHIc-2VHfj5jsq4N5T7OLTK9KAwwLhx7qNEe0JDNdaSEKbAZNc4LNAKHImy17PS6kHg1_w&usqp=CAE",
-    price: "R$ 17119.89",
-  },
-];
-
 function Home() {
   const [sideBar, setSideBar] = useState(false);
-  const [products, setProducts] = useState(null);
   const [cartModal, setCartModal] = useState(false);
 
+  const { products, setProducts } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
   console.log(cart);
@@ -92,26 +67,26 @@ function Home() {
   }, []);
 
   return (
-    <main id="home-page">
+    <main id='home-page'>
       <header>
-        <img src={logo} alt="git --store" />
+        <img src={logo} alt='git --store' />
         <Typewriter
           onInit={(typewriter) => {
-            typewriter.typeString("git --store").pauseFor(3000).start();
+            typewriter.typeString('git --store').pauseFor(3000).start();
           }}
         />
       </header>
-      <div className="banner"></div>
+      <div className='banner'></div>
       <nav>
         <div>
-          <div className="nav-menu">
+          <div className='nav-menu'>
             {sideBar ? (
-              <IoClose onClick={toggleSideBar} className="menu" />
+              <IoClose onClick={toggleSideBar} className='menu' />
             ) : (
-              <FaBars onClick={toggleSideBar} className="menu" />
+              <FaBars onClick={toggleSideBar} className='menu' />
             )}
 
-            <FaShoppingCart onClick={toggleCart} className="cart" />
+            <FaShoppingCart onClick={toggleCart} className='cart' />
           </div>
           {/* //!for desktop 
                     <div className="nav-item">
@@ -124,13 +99,13 @@ function Home() {
                         nav-item
                     </div> */}
         </div>
-        <aside className={sideBar ? undefined : "hidden-aside"}>
-          <div className="sidebar-item">Login/Logout</div>
-          <div className="sidebar-item">Historico</div>
-          <div className="sidebar-item">Checkout</div>
+        <aside className={sideBar ? undefined : 'hidden-aside'}>
+          <div className='sidebar-item'>Login/Logout</div>
+          <div className='sidebar-item'>Historico</div>
+          <div className='sidebar-item'>Checkout</div>
         </aside>
       </nav>
-      <div className="products">
+      <div className='products'>
         {products ? (
           products.map((product) => {
             return <Product product={product} cart={cart} setCart={setCart} />;
@@ -139,12 +114,12 @@ function Home() {
           <></>
         )}
       </div>
-      <div className={cartModal ? "cart-modal" : "hidden"}>
-        <div className="cart-box">
-          <FaShoppingCart className="cart-close" onClick={toggleCart} />
+      <div className={cartModal ? 'cart-modal' : 'hidden'}>
+        <div className='cart-box'>
+          <FaShoppingCart className='cart-close' onClick={toggleCart} />
           {cart.map((product) => {
             return (
-              <div className="cart-item">
+              <div className='cart-item'>
                 <span>{product.title}</span>
                 <span>{product.price}</span>
                 <span>{product.quantity} unidade(s)</span>
