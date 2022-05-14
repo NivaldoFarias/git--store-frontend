@@ -39,11 +39,12 @@ const teste = [
   },
 ];
 
-export default function Home() {
+function Home() {
   const [sideBar, setSideBar] = useState(false);
   const [products, setProducts] = useState(null);
   const [cartModal, setCartModal] = useState(false);
-  const [cart, setCart] = useState([]);
+
+  const { cart, setCart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
   console.log(cart);
 
@@ -155,3 +156,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home;
