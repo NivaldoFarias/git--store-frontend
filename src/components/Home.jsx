@@ -2,12 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import dotenv from "dotenv";
 import Typewriter from "typewriter-effect";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXmark,
-  faBars,
-  faCartShopping,
-} from "@fortawesome/free-solid-svg-icons";
+import { IoClose } from "react-icons/io5";
+import { FaShoppingCart, FaBars } from "react-icons/fa";
 
 import Product from "./Product";
 
@@ -108,16 +104,13 @@ export default function Home() {
       <nav>
         <div>
           <div className="nav-menu">
-            <FontAwesomeIcon
-              onClick={toggleSideBar}
-              icon={sideBar ? faXmark : faBars}
-              className="menu"
-            />
-            <FontAwesomeIcon
-              onClick={toggleCart}
-              icon={faCartShopping}
-              className="cart"
-            />
+            {sideBar ? (
+              <IoClose onClick={toggleSideBar} className="menu" />
+            ) : (
+              <FaBars onClick={toggleSideBar} className="menu" />
+            )}
+
+            <FaShoppingCart onClick={toggleCart} className="cart" />
           </div>
           {/* //!for desktop 
                     <div className="nav-item">
@@ -138,15 +131,8 @@ export default function Home() {
       </nav>
       <div className="products">
         {products ? (
-          products.map((product, index) => {
-            return (
-              <Product
-                key={index}
-                product={product}
-                cart={cart}
-                setCart={setCart}
-              />
-            );
+          products.map((product) => {
+            return <Product product={product} cart={cart} setCart={setCart} />;
           })
         ) : (
           <></>
@@ -154,14 +140,10 @@ export default function Home() {
       </div>
       <div className={cartModal ? "cart-modal" : "hidden"}>
         <div className="cart-box">
-          <FontAwesomeIcon
-            className="cart-close"
-            icon={faXmark}
-            onClick={toggleCart}
-          />
-          {cart.map((product, index) => {
+          <FaShoppingCart className="cart-close" onClick={toggleCart} />
+          {cart.map((product) => {
             return (
-              <div key={index} className="cart-item">
+              <div className="cart-item">
                 <span>{product.title}</span>
                 <span>{product.price}</span>
                 <span>{product.quantity} unidade(s)</span>
