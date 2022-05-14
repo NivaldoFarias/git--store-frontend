@@ -1,38 +1,28 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
-import Typewriter from "typewriter-effect";
-import "react-confirm-alert/src/react-confirm-alert.css";
-import dotenv from "dotenv";
-import axios from "axios";
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import Typewriter from 'typewriter-effect';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import dotenv from 'dotenv';
+import axios from 'axios';
 
-import validateEmail from "./../utils/validateEmail.js";
-import getRandomInt from "./../utils/getRandomInt.js";
+import validateEmail from './../utils/validateEmail.js';
+import getRandomInt from './../utils/getRandomInt.js';
+import TokenContext from './../hooks/TokenContext';
 
-//import { DataContext } from "./../hooks/DataContext";
-import TokenContext from "./../hooks/TokenContext";
-
-import logo from "./../assets/git--store-logo.png";
+import logo from './../assets/git--store-logo.png';
 
 dotenv.config();
 
 function Signin() {
   const [signinData, setSigninData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { token, setToken } = useContext(TokenContext);
-  //const { data, setData } = useContext(DataContext);
+  const { setToken } = useContext(TokenContext);
   const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token) {
-      navigate("/home");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   function buildSigninPage() {
     function validateSignin() {
@@ -40,7 +30,7 @@ function Signin() {
         signinData.password?.length > 0 &&
         !hasSubmitted
         ? validateEmail(signinData.email)
-        : "disabled";
+        : 'disabled';
     }
 
     function handleInputChange(e) {
@@ -55,15 +45,14 @@ function Signin() {
 
       request.then((response) => {
         setToken(response.data);
-        //setData({ ...data, user: { ...response.data.user } });
-        navigate("/home");
+        navigate('/');
       });
       request.catch((error) => {
         confirmAlert({
           message: `${error.response.data.message}. Please try again.`,
           buttons: [
             {
-              label: "OK",
+              label: 'OK',
               onClick: () => null,
             },
           ],
@@ -75,25 +64,25 @@ function Signin() {
     function resetAll() {
       setHasSubmitted(false);
       setSigninData({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       });
     }
 
     return (
       <>
         <figure>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt='logo' />
           <Typewriter
             options={{
               loop: true,
             }}
             onInit={(typewriter) => {
               typewriter
-                .typeString("git --store")
+                .typeString('git --store')
                 .pauseFor(3000)
                 .deleteAll()
-                .typeString("auth user")
+                .typeString('auth user')
                 .pauseFor(2000)
                 .deleteAll()
                 .start();
@@ -101,7 +90,7 @@ function Signin() {
           />
         </figure>
         <form
-          className="form-group"
+          className='form-group'
           onSubmit={(e) => {
             e.preventDefault();
             setHasSubmitted(true);
@@ -110,40 +99,40 @@ function Signin() {
             }, getRandomInt(750, 2000));
           }}
         >
-          <div className="input-group">
+          <div className='input-group'>
             <input
-              className={hasSubmitted ? "disabled" : ""}
-              type="text"
+              className={hasSubmitted ? 'disabled' : ''}
+              type='text'
               value={signinData.email}
-              name="email"
+              name='email'
               onChange={handleInputChange}
               required
             />
-            <span className="highlight"></span>
-            <span className="bar"></span>
+            <span className='highlight'></span>
+            <span className='bar'></span>
             <label>git auth user.email</label>
           </div>
-          <div className="input-group">
+          <div className='input-group'>
             <input
-              className={hasSubmitted ? "disabled" : ""}
-              type="password"
+              className={hasSubmitted ? 'disabled' : ''}
+              type='password'
               value={signinData.password}
-              name="password"
+              name='password'
               onChange={handleInputChange}
               required
             />
-            <span className="highlight"></span>
-            <span className="bar"></span>
+            <span className='highlight'></span>
+            <span className='bar'></span>
             <label>git auth user.password</label>
           </div>
-          <button className={validateSignin()} type="submit">
-            <p className={hasSubmitted ? "hidden" : ""}>git init</p>
+          <button className={validateSignin()} type='submit'>
+            <p className={hasSubmitted ? 'hidden' : ''}>git init</p>
             <div
-              id="loading-dots"
-              className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
+              id='loading-dots'
+              className={hasSubmitted ? 'dot-pulse' : 'dot-pulse hidden'}
             ></div>
           </button>
-          <Link to="/signup">config new user</Link>
+          <Link to='/signup'>config new user</Link>
         </form>
       </>
     );
@@ -153,7 +142,7 @@ function Signin() {
 
   return (
     <>
-      <main id="sign-in-page" className="auth-pages">
+      <main id='sign-in-page' className='auth-pages'>
         {signinPage}
       </main>
     </>
