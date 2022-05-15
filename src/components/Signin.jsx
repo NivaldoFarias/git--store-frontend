@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import Typewriter from 'typewriter-effect';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import dotenv from 'dotenv';
 import axios from 'axios';
 
 import validateEmail from './../utils/validateEmail.js';
@@ -11,8 +10,6 @@ import getRandomInt from './../utils/getRandomInt.js';
 import TokenContext from './../hooks/TokenContext';
 
 import logo from './../assets/git--store-logo.png';
-
-dotenv.config();
 
 function Signin() {
   const [signinData, setSigninData] = useState({

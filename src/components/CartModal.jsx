@@ -1,7 +1,5 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -9,12 +7,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import CartContext from './../hooks/CartContext';
 import TokenContext from './../hooks/TokenContext';
 
-dotenv.config();
-
 export default function CartModal({ cartModal, toggleCart }) {
   const { cart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
-  const navigate = useNavigate();
   const CONFIG = {
     headers: {
       authorization: `Bearer ${token}`,

@@ -1,25 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
-import dotenv from 'dotenv';
 import axios from 'axios';
 import Typewriter from 'typewriter-effect';
 import { IoClose } from 'react-icons/io5';
 import { FaShoppingCart, FaBars } from 'react-icons/fa';
 
+import ProductsContext from './../hooks/ProductsContext';
+
 import Product from './Product';
 import CartModal from './CartModal';
-
-import ProductsContext from './../hooks/ProductsContext';
-import CartContext from './../hooks/CartContext';
-
 import logo from './../assets/git--store-logo.png';
-
-dotenv.config();
 
 function Home() {
   const [sideBar, setSideBar] = useState(false);
   const [cartModal, setCartModal] = useState(false);
   const [categories, setCategories] = useState();
-  const [selected, setSelected] = useState();
 
   const { products, setProducts } = useContext(ProductsContext);
 

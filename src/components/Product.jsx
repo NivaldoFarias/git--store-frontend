@@ -1,12 +1,9 @@
-import dotenv from 'dotenv';
 import { useContext } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
-
-dotenv.config();
 
 export default function Product({ product }) {
   let { image_url, title, price, _id, inventory } = product;

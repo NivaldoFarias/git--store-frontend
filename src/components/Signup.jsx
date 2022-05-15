@@ -4,16 +4,10 @@ import { confirmAlert } from 'react-confirm-alert';
 import Typewriter from 'typewriter-effect';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import axios from 'axios';
-import dotenv from 'dotenv';
 
 import validateEmail from './../utils/validateEmail.js';
 import getRandomInt from './../utils/getRandomInt.js';
-
-//import { DataContext } from "./../hooks/DataContext";
-
 import logo from './../assets/git--store-logo.png';
-
-dotenv.config();
 
 function Signup() {
   const [signupData, setSignupData] = useState({
