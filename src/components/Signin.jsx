@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import Typewriter from 'typewriter-effect';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import dotenv from 'dotenv';
 import axios from 'axios';
 
 import validateEmail from './../utils/validateEmail.js';
@@ -12,8 +11,6 @@ import TokenContext from './../hooks/TokenContext';
 
 import logo from './../assets/git--store-logo.png';
 
-dotenv.config();
-
 function Signin() {
   const [signinData, setSigninData] = useState({
     email: '',
@@ -21,54 +18,9 @@ function Signin() {
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const { setToken } = useContext(TokenContext);
-  const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   function buildSigninPage() {
-    function validateSignin() {
-      return signinData.email?.length > 0 &&
-        signinData.password?.length > 0 &&
-        !hasSubmitted
-        ? validateEmail(signinData.email)
-        : 'disabled';
-    }
-
-    function handleInputChange(e) {
-      setSigninData({ ...signinData, [e.target.name]: e.target.value });
-    }
-
-    function handleSignin() {
-      const request = axios.post(`${URL}/auth/sign-in`, {
-        email: signinData.email,
-        password: signinData.password,
-      });
-
-      request.then((response) => {
-        setToken(response.data);
-        navigate('/');
-      });
-      request.catch((error) => {
-        confirmAlert({
-          message: `${error.response.data.message}. Please try again.`,
-          buttons: [
-            {
-              label: 'OK',
-              onClick: () => null,
-            },
-          ],
-        });
-        resetAll();
-      });
-    }
-
-    function resetAll() {
-      setHasSubmitted(false);
-      setSigninData({
-        email: '',
-        password: '',
-      });
-    }
-
     return (
       <>
         <figure>
@@ -136,6 +88,52 @@ function Signin() {
         </form>
       </>
     );
+
+    function validateSignin() {
+      return signinData.email?.length > 0 &&
+        signinData.password?.length > 0 &&
+        !hasSubmitted
+        ? validateEmail(signinData.email)
+        : 'disabled';
+    }
+
+    function handleInputChange(e) {
+      setSigninData({ ...signinData, [e.target.name]: e.target.value });
+    }
+
+    function handleSignin() {
+      const URL = `${process.env.API_URL}/auth/sign-in`;
+      const body = {
+        email: signinData.email,
+        password: signinData.password,
+      };
+      const request = axios.post(URL, body);
+
+      request.then((response) => {
+        setToken(response.data);
+        navigate('/');
+      });
+      request.catch((error) => {
+        confirmAlert({
+          message: `${error.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => null,
+            },
+          ],
+        });
+        resetAll();
+      });
+    }
+
+    function resetAll() {
+      setHasSubmitted(false);
+      setSigninData({
+        email: '',
+        password: '',
+      });
+    }
   }
 
   const signinPage = buildSigninPage();

@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { ProductsProvider } from '../hooks/ProductsContext';
 import { useLocalStorage } from './../hooks/useLocalStorage';
 import CartContext from './../hooks/CartContext';
 import TokenContext from './../hooks/TokenContext';
