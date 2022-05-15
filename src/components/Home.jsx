@@ -5,10 +5,13 @@ import Typewriter from 'typewriter-effect';
 import { IoClose } from 'react-icons/io5';
 import { FaShoppingCart, FaBars } from 'react-icons/fa';
 
+import Product from './Product';
+import CartModal from './CartModal';
+
 import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
+
 import logo from './../assets/git--store-logo.png';
-import Product from './Product';
 
 dotenv.config();
 
@@ -19,8 +22,6 @@ function Home() {
   const [selected, setSelected] = useState();
 
   const { products, setProducts } = useContext(ProductsContext);
-  const { cart, setCart } = useContext(CartContext);
-  console.log(products);
 
   useEffect(() => {
     const URL = process.env.REACT_APP_API_URL;
@@ -29,7 +30,6 @@ function Home() {
       .then((response) => {
         const dbProducts = response.data;
         setProducts(dbProducts);
-        setCart(dbProducts.map((product) => ({ ...product, volume: 1 })));
         setCategories(dbProducts.map((product) => product.category));
       })
       .catch((err) => {
@@ -61,7 +61,7 @@ function Home() {
               <FaShoppingCart onClick={toggleCart} className="cart" />
             </div>
             {/*
-            !for desktop 
+            for desktop 
             <div className="nav-item">
               nav-item
             </div>
@@ -82,26 +82,20 @@ function Home() {
         <div className="products">
           {products ? (
             products.map((product, index) => {
-              return <Product key={index} product={product} />;
+              return (
+                <Product
+                  key={index}
+                  product={product}
+                  products={products}
+                  setProducts={setProducts}
+                />
+              );
             })
           ) : (
             <></>
           )}
         </div>
-        <div className={cartModal ? 'cart-modal' : 'hidden'}>
-          <div className="cart-box">
-            <FaShoppingCart className="cart-close" onClick={toggleCart} />
-            {cart.map((product, index) => {
-              return (
-                <div key={index} className="cart-item">
-                  <span>{product.title}</span>
-                  <span>{product.price}</span>
-                  <span>{product.volume} unidade(s)</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <CartModal cartModal={cartModal} toggleCart={toggleCart} />
       </>
     );
 
