@@ -5,10 +5,13 @@ import Typewriter from 'typewriter-effect';
 import { IoClose } from 'react-icons/io5';
 import { FaShoppingCart, FaBars } from 'react-icons/fa';
 
+import Product from './Product';
+import CartModal from './CartModal';
+
 import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
+
 import logo from './../assets/git--store-logo.png';
-import Product from './Product';
 
 dotenv.config();
 
@@ -19,7 +22,6 @@ function Home() {
   const [selected, setSelected] = useState();
 
   const { products, setProducts } = useContext(ProductsContext);
-  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
     const URL = process.env.REACT_APP_API_URL;
@@ -59,7 +61,7 @@ function Home() {
               <FaShoppingCart onClick={toggleCart} className="cart" />
             </div>
             {/*
-            !for desktop 
+            for desktop 
             <div className="nav-item">
               nav-item
             </div>
@@ -86,21 +88,7 @@ function Home() {
             <></>
           )}
         </div>
-        <div className={cartModal ? 'cart-modal' : 'hidden'}>
-          <div className="cart-box">
-            <FaShoppingCart className="cart-close" onClick={toggleCart} />
-            {cart.map((product, index) => {
-              console.log(cart);
-              return (
-                <div key={index} className="cart-item">
-                  <span>{product.title}</span>
-                  <span>R$ {product.price}</span>
-                  <span>{product.volume} unidade(s)</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <CartModal cartModal={cartModal} toggleCart={toggleCart} />
       </>
     );
 
