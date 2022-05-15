@@ -24,9 +24,9 @@ function Home() {
   const { products, setProducts } = useContext(ProductsContext);
 
   useEffect(() => {
-    const URL = process.env.REACT_APP_API_URL;
+    const URL = `${process.env.API_URL}/sessions`;
     axios
-      .get(`${URL}/products`)
+      .get(URL)
       .then((response) => {
         const dbProducts = response.data;
         setProducts(dbProducts);
@@ -35,6 +35,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function buildHomePage() {
@@ -74,22 +75,15 @@ function Home() {
           */}
           </div>
           <aside className={sideBar ? undefined : 'hidden-aside'}>
-            <div className="sidebar-item">Login/Logout</div>
-            <div className="sidebar-item">Historico</div>
+            <div className="sidebar-item">Signin/Signou</div>
+            <div className="sidebar-item">Transactions</div>
             <div className="sidebar-item">Checkout</div>
           </aside>
         </nav>
         <div className="products">
           {products ? (
             products.map((product, index) => {
-              return (
-                <Product
-                  key={index}
-                  product={product}
-                  products={products}
-                  setProducts={setProducts}
-                />
-              );
+              return <Product key={index} product={product} />;
             })
           ) : (
             <></>
