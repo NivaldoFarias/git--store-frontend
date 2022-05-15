@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useContext } from 'react';
+import { IoClose } from 'react-icons/io5';
 import { FaShoppingCart } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -20,7 +21,7 @@ export default function CartModal({ cartModal, toggleCart }) {
   function buildCartModal() {
     return (
       <div className="cart-modal__container">
-        <FaShoppingCart className="cart-modal__close" onClick={toggleCart} />
+        <IoClose className="cart-modal__close" onClick={toggleCart} />
         {cart.map((product, index) => {
           const { price, volume, title } = product;
           total += price * volume;

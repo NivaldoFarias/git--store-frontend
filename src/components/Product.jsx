@@ -6,23 +6,44 @@ import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
 
 export default function Product({ product }) {
-  let { image_url, title, price, _id, inventory } = product;
+  let { image_url, title, price, _id, inventory, shell_id } = product;
   const { cart, setCart } = useContext(CartContext);
   const { products, setProducts } = useContext(ProductsContext);
 
   function buildProduct() {
+    let amount = null;
+    let cents = null;
+    const balance = price.toFixed(2).toString().split('.');
+    if (balance) {
+      if (price.balance * 1 === 0) {
+        amount = '0,';
+        cents = '00';
+      } else {
+        amount = balance[0];
+        cents = `,${balance[1]}`;
+      }
+    }
+
     return (
       <>
         <a href="#">
           <img src={image_url} alt={title} />
         </a>
         <h1>{title}</h1>
-        <span>R$ {price}</span>
+        <div className="text-container">
+          <p className="text-container__price">
+            <span>R$</span> {amount}
+            <span>{cents}</span>
+          </p>
+          <p className="text-container__shell-id">
+            id <span>{shell_id}</span>
+          </p>
+        </div>
         <button
           className={inventory === 0 ? 'disabled' : undefined}
           onClick={addToCart}
         >
-          Add to Cart
+          git add {shell_id}
         </button>
       </>
     );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Typewriter from 'typewriter-effect';
-import { IoClose } from 'react-icons/io5';
+
 import { RiTerminalFill, RiShoppingCartLine } from 'react-icons/ri';
 import { FiUser } from 'react-icons/fi';
 import { FaBars } from 'react-icons/fa';
@@ -57,22 +57,6 @@ function Home() {
           />
         </header>
         <div className="banner"></div>
-        <nav>
-          <div>
-            {/* <div className="nav-menu">
-              {sideBar ? (
-                <IoClose onClick={toggleSideBar} className="menu" />
-              ) : (
-                <FaBars onClick={toggleSideBar} className="menu" />
-              )}
-            </div> */}
-          </div>
-          <aside className={sideBar ? undefined : 'hidden-aside'}>
-            <div className="sidebar-item">Signin/Signou</div>
-            <div className="sidebar-item">Transactions</div>
-            <div className="sidebar-item">Checkout</div>
-          </aside>
-        </nav>
         <div className="products">
           {products ? (
             products.map((product, index) => {
