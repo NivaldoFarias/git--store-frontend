@@ -339,10 +339,10 @@
   footer {
     @include flex(row, space-evenly, center, initial);
     position: fixed;
+    z-index: 3;
     bottom: 0;
     left: 0;
 
-    padding: 0 14px;
     height: 70px;
     width: 100vw;
 
@@ -440,7 +440,8 @@
     height: 0;
   }
   .products {
-    @include flex(column, flex-start, center, 0);
+    @include flex(column, flex-start, center, 15px);
+    padding-top: 15px;
     height: 1000px;
     width: 100%;
     background-color: $background;
@@ -450,7 +451,6 @@
       width: 90%;
       background-color: white;
       border-radius: 5px;
-      margin: 15px 0 0 0;
       padding: 0 20px;
       box-shadow: 0 2px 7px 2px rgb(0 0 0 / 12%);
 

@@ -49,6 +49,9 @@ function Home() {
                 .pauseFor(10000)
                 .deleteAll()
                 .pauseFor(1000)
+                .typeString('open git shell')
+                .pauseFor(3000)
+                .deleteAll()
                 .start();
             }}
           />
