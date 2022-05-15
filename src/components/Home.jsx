@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Typewriter from 'typewriter-effect';
-import { IoClose } from 'react-icons/io5';
-import { FaShoppingCart, FaBars } from 'react-icons/fa';
+
+import { RiTerminalFill, RiShoppingCartLine } from 'react-icons/ri';
+import { FiUser } from 'react-icons/fi';
+import { FaBars } from 'react-icons/fa';
 
 import ProductsContext from './../hooks/ProductsContext';
 
@@ -38,42 +40,23 @@ function Home() {
         <header>
           <img src={logo} alt="git --store" />
           <Typewriter
+            options={{
+              loop: true,
+            }}
             onInit={(typewriter) => {
-              typewriter.typeString('git --store').pauseFor(3000).start();
+              typewriter
+                .typeString('git --store')
+                .pauseFor(10000)
+                .deleteAll()
+                .pauseFor(1000)
+                .typeString('open git shell')
+                .pauseFor(3000)
+                .deleteAll()
+                .start();
             }}
           />
         </header>
         <div className="banner"></div>
-        <nav>
-          <div>
-            <div className="nav-menu">
-              {sideBar ? (
-                <IoClose onClick={toggleSideBar} className="menu" />
-              ) : (
-                <FaBars onClick={toggleSideBar} className="menu" />
-              )}
-
-              <FaShoppingCart onClick={toggleCart} className="cart" />
-            </div>
-            {/*
-            for desktop 
-            <div className="nav-item">
-              nav-item
-            </div>
-            <div className="nav-item">
-              nav-item
-            </div>
-            <div className="nav-item">
-              nav-item
-            </div> 
-          */}
-          </div>
-          <aside className={sideBar ? undefined : 'hidden-aside'}>
-            <div className="sidebar-item">Signin/Signou</div>
-            <div className="sidebar-item">Transactions</div>
-            <div className="sidebar-item">Checkout</div>
-          </aside>
-        </nav>
         <div className="products">
           {products ? (
             products.map((product, index) => {
@@ -84,6 +67,16 @@ function Home() {
           )}
         </div>
         <CartModal cartModal={cartModal} toggleCart={toggleCart} />
+        <footer>
+          <FiUser className="action-icon user-icon" />
+          <div className="split-bar"></div>
+          <RiTerminalFill className="action-icon terminal-icon " />
+          <div className="split-bar"></div>
+          <RiShoppingCartLine
+            className="action-icon cart"
+            onClick={toggleCart}
+          />
+        </footer>
       </>
     );
 

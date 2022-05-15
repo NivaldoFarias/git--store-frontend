@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import Typewriter from 'typewriter-effect';
