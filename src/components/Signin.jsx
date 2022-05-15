@@ -21,54 +21,9 @@ function Signin() {
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const { setToken } = useContext(TokenContext);
-  const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   function buildSigninPage() {
-    function validateSignin() {
-      return signinData.email?.length > 0 &&
-        signinData.password?.length > 0 &&
-        !hasSubmitted
-        ? validateEmail(signinData.email)
-        : 'disabled';
-    }
-
-    function handleInputChange(e) {
-      setSigninData({ ...signinData, [e.target.name]: e.target.value });
-    }
-
-    function handleSignin() {
-      const request = axios.post(`${URL}/auth/sign-in`, {
-        email: signinData.email,
-        password: signinData.password,
-      });
-
-      request.then((response) => {
-        setToken(response.data);
-        navigate('/');
-      });
-      request.catch((error) => {
-        confirmAlert({
-          message: `${error.response.data.message}. Please try again.`,
-          buttons: [
-            {
-              label: 'OK',
-              onClick: () => null,
-            },
-          ],
-        });
-        resetAll();
-      });
-    }
-
-    function resetAll() {
-      setHasSubmitted(false);
-      setSigninData({
-        email: '',
-        password: '',
-      });
-    }
-
     return (
       <>
         <figure>
@@ -136,6 +91,52 @@ function Signin() {
         </form>
       </>
     );
+
+    function validateSignin() {
+      return signinData.email?.length > 0 &&
+        signinData.password?.length > 0 &&
+        !hasSubmitted
+        ? validateEmail(signinData.email)
+        : 'disabled';
+    }
+
+    function handleInputChange(e) {
+      setSigninData({ ...signinData, [e.target.name]: e.target.value });
+    }
+
+    function handleSignin() {
+      const URL = `${process.env.API_URL}/auth/sign-in`;
+      const body = {
+        email: signinData.email,
+        password: signinData.password,
+      };
+      const request = axios.post(URL, body);
+
+      request.then((response) => {
+        setToken(response.data);
+        navigate('/');
+      });
+      request.catch((error) => {
+        confirmAlert({
+          message: `${error.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => null,
+            },
+          ],
+        });
+        resetAll();
+      });
+    }
+
+    function resetAll() {
+      setHasSubmitted(false);
+      setSigninData({
+        email: '',
+        password: '',
+      });
+    }
   }
 
   const signinPage = buildSigninPage();

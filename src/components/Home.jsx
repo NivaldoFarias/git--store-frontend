@@ -24,7 +24,7 @@ function Home() {
   const { products, setProducts } = useContext(ProductsContext);
 
   useEffect(() => {
-    const URL = `${process.env.API_URL}/sessions`;
+    const URL = `http://localhost:5000/api/products`;
     axios
       .get(URL)
       .then((response) => {

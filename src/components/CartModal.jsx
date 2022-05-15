@@ -24,14 +24,14 @@ export default function CartModal({ cartModal, toggleCart }) {
 
   function buildCartModal() {
     return (
-      <div className="cart-box">
-        <FaShoppingCart className="cart-close" onClick={toggleCart} />
+      <div className="cart-modal__container">
+        <FaShoppingCart className="cart-modal__close" onClick={toggleCart} />
         {cart.map((product, index) => {
           const { price, volume, title } = product;
           total += price * volume;
 
           return (
-            <div key={index} className="cart-item">
+            <div key={index} className="cart-modal__item">
               <span>{title}</span>
               <span>R$ {price}</span>
               <span>{volume} unit(s)</span>
