@@ -1,6 +1,6 @@
-@import "./sass/resets";
-@import "./sass/variables";
-@import "./sass/mixins";
+@import './sass/resets';
+@import './sass/variables';
+@import './sass/mixins';
 
 .auth-pages {
   @include flex(column, space-evenly, center, initial);
@@ -121,7 +121,7 @@
       height: 2px;
       width: 0;
 
-      content: "";
+      content: '';
       background: $primary;
       transition: 0.2s ease all;
     }
@@ -338,12 +338,12 @@
   .banner {
     width: 100%;
     height: 200px;
-    background-image: url("https://referbruv.com/data/Admin/2020/5/git-jenkins-banner.png");
+    background-image: url('https://cdn.hashnode.com/res/hashnode/image/upload/v1634077183553/TsDGLZu8O.jpeg');
     background-size: cover;
   }
 
   header::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     bottom: 0;
@@ -371,7 +371,7 @@
   }
 
   nav::after {
-    content: "";
+    content: '';
     display: block;
     width: 100%;
     height: 1px;
@@ -778,7 +778,7 @@
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     display: inline-block;
     position: absolute;
     top: 0;

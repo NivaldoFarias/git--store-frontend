@@ -72,7 +72,7 @@ function Signin() {
     return (
       <>
         <figure>
-          <img src={logo} alt='logo' />
+          <img src={logo} alt="logo" />
           <Typewriter
             options={{
               loop: true,
@@ -90,7 +90,7 @@ function Signin() {
           />
         </figure>
         <form
-          className='form-group'
+          className="form-group"
           onSubmit={(e) => {
             e.preventDefault();
             setHasSubmitted(true);
@@ -99,40 +99,40 @@ function Signin() {
             }, getRandomInt(750, 2000));
           }}
         >
-          <div className='input-group'>
+          <div className="input-group">
             <input
               className={hasSubmitted ? 'disabled' : ''}
-              type='text'
+              type="text"
               value={signinData.email}
-              name='email'
+              name="email"
               onChange={handleInputChange}
               required
             />
-            <span className='highlight'></span>
-            <span className='bar'></span>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label>git auth user.email</label>
           </div>
-          <div className='input-group'>
+          <div className="input-group">
             <input
               className={hasSubmitted ? 'disabled' : ''}
-              type='password'
+              type="password"
               value={signinData.password}
-              name='password'
+              name="password"
               onChange={handleInputChange}
               required
             />
-            <span className='highlight'></span>
-            <span className='bar'></span>
+            <span className="highlight"></span>
+            <span className="bar"></span>
             <label>git auth user.password</label>
           </div>
-          <button className={validateSignin()} type='submit'>
+          <button className={validateSignin()} type="submit">
             <p className={hasSubmitted ? 'hidden' : ''}>git init</p>
             <div
-              id='loading-dots'
+              id="loading-dots"
               className={hasSubmitted ? 'dot-pulse' : 'dot-pulse hidden'}
             ></div>
           </button>
-          <Link to='/signup'>config new user</Link>
+          <Link to="/signup">config new user</Link>
         </form>
       </>
     );
@@ -142,7 +142,7 @@ function Signin() {
 
   return (
     <>
-      <main id='sign-in-page' className='auth-pages'>
+      <main id="sign-in-page" className="auth-pages">
         {signinPage}
       </main>
     </>

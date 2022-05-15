@@ -1,18 +1,18 @@
-import React, { useContext, useState } from "react";
-import Modal from "react-modal";
-import { IoChevronUpSharp } from "react-icons/io5";
+import React, { useContext, useState } from 'react';
+import Modal from 'react-modal';
+import { IoChevronUpSharp } from 'react-icons/io5';
 
-import CartContext from "./../hooks/CartContext";
+import CartContext from './../hooks/CartContext';
 
-import CommandLine from "./CommandLine";
+import CommandLine from './CommandLine';
 
 function Shell() {
-  const [lineType, setLineType] = useState(["user"]);
+  const [lineType, setLineType] = useState(['user']);
   const [modalIsOpen, setIsOpen] = useState(false);
   const { cart, setCart } = useContext(CartContext);
 
   function buildShell() {
-    const availableProducts = ["apple", "banana", "orange", "pear"];
+    const availableProducts = ['apple', 'banana', 'orange', 'pear'];
     const availableCommands = {
       add: (targets) => {
         for (const target of targets) {
@@ -70,8 +70,8 @@ function Shell() {
     );
 
     function updateShell(type) {
-      if (type === "clear") {
-        setLineType(["clear"]);
+      if (type === 'clear') {
+        setLineType(['clear']);
       } else {
         setLineType((prevState) => [...prevState, type]);
       }

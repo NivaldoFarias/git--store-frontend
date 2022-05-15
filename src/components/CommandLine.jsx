@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 function CommandLine(props) {
   const { updateShell, availableCommands, output } = props;
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [disabled, setDisabled] = useState(false);
   const functions = Object.keys(availableCommands);
 
   useEffect(() => {
-    if (output === "clear") {
-      setInput("");
+    if (output === 'clear') {
+      setInput('');
       setDisabled(false);
     }
   }, [output]);
@@ -39,11 +39,11 @@ function CommandLine(props) {
     }
 
     function handleCommand(e) {
-      if (e.code === "Enter" && input !== "") {
-        const commandLine = input.split(" ");
+      if (e.code === 'Enter' && input !== '') {
+        const commandLine = input.split(' ');
         e.target.blur();
         setDisabled(true);
-        if (commandLine[0] === "git") {
+        if (commandLine[0] === 'git') {
           const command = commandLine[1];
           const commandTargets = commandLine.slice(2);
 
@@ -53,12 +53,12 @@ function CommandLine(props) {
             );
             availableCommands[command](targets);
           }
-          updateShell("user");
-        } else if (commandLine[0] === "clear") {
-          updateShell("clear");
+          updateShell('user');
+        } else if (commandLine[0] === 'clear') {
+          updateShell('clear');
         } else {
           console.log(`Unknown command`);
-          updateShell("unknown");
+          updateShell('unknown');
         }
       }
     }
@@ -68,7 +68,7 @@ function CommandLine(props) {
 
   return (
     <>
-      {output === "unknown" ? (
+      {output === 'unknown' ? (
         <div className="command-line">
           <span className="lesser-text">Command not found</span>
         </div>

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
-import Typewriter from "typewriter-effect";
-import "react-confirm-alert/src/react-confirm-alert.css";
-import axios from "axios";
-import dotenv from "dotenv";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import Typewriter from 'typewriter-effect';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import axios from 'axios';
+import dotenv from 'dotenv';
 
-import validateEmail from "./../utils/validateEmail.js";
-import getRandomInt from "./../utils/getRandomInt.js";
+import validateEmail from './../utils/validateEmail.js';
+import getRandomInt from './../utils/getRandomInt.js';
 
 //import { DataContext } from "./../hooks/DataContext";
 
-import logo from "./../assets/git--store-logo.png";
+import logo from './../assets/git--store-logo.png';
 
 dotenv.config();
 
 function Signup() {
   const [signupData, setSignupData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
   });
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const URL = process.env.REACT_APP_API_URL;
@@ -34,7 +34,7 @@ function Signup() {
         signupData.passwordConfirm?.length > 0 &&
         signupData.password === signupData.passwordConfirm
         ? validateEmail(signupData.email)
-        : "disabled";
+        : 'disabled';
     }
 
     function handleInputChange(e) {
@@ -49,7 +49,7 @@ function Signup() {
       });
 
       request.then((_res) => {
-        navigate("/");
+        navigate('/');
       });
       request.catch((error) => {
         console.log(error);
@@ -57,7 +57,7 @@ function Signup() {
           message: `${error.response.data.message}. Please try again.`,
           buttons: [
             {
-              label: "OK",
+              label: 'OK',
               onClick: () => null,
             },
           ],
@@ -69,10 +69,10 @@ function Signup() {
     function resetAll() {
       setHasSubmitted(false);
       setSignupData({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
       });
     }
 
@@ -87,10 +87,10 @@ function Signup() {
             }}
             onInit={(typewriter) => {
               typewriter
-                .typeString("git --store")
+                .typeString('git --store')
                 .pauseFor(3000)
                 .deleteAll()
-                .typeString("create user")
+                .typeString('create user')
                 .pauseFor(2000)
                 .deleteAll()
                 .start();
@@ -109,7 +109,7 @@ function Signup() {
         >
           <div className="input-group">
             <input
-              className={hasSubmitted ? "disabled" : ""}
+              className={hasSubmitted ? 'disabled' : ''}
               type="text"
               value={signupData.name}
               name="name"
@@ -122,7 +122,7 @@ function Signup() {
           </div>
           <div className="input-group">
             <input
-              className={hasSubmitted ? "disabled" : ""}
+              className={hasSubmitted ? 'disabled' : ''}
               type="text"
               value={signupData.email}
               name="email"
@@ -158,10 +158,10 @@ function Signup() {
             <label>git auth --global user.password</label>
           </div>
           <button className={validateSignin()} type="submit">
-            <p className={hasSubmitted ? "hidden" : ""}>git push</p>
+            <p className={hasSubmitted ? 'hidden' : ''}>git push</p>
             <div
               id="loading-dots"
-              className={hasSubmitted ? "dot-pulse" : "dot-pulse hidden"}
+              className={hasSubmitted ? 'dot-pulse' : 'dot-pulse hidden'}
             ></div>
           </button>
           <Link to="/">sign-in user</Link>

@@ -1,7 +1,0 @@
-{
-  "prettier.configPath": "config/.prettierrc.json",
-  "prettier.jsxSingleQuote": true,
-  "prettier.requireConfig": true,
-  "prettier.trailingComma": "all",
-  "prettier.withNodeModules": true
-}

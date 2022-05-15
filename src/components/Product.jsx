@@ -6,7 +6,7 @@ import CartContext from './../hooks/CartContext';
 dotenv.config();
 
 export default function Product({ product }) {
-  const { image, title, price, _id } = product;
+  const { image_url, title, price, _id } = product;
   const { cart, setCart } = useContext(CartContext);
 
   function addToCart() {
@@ -20,22 +20,13 @@ export default function Product({ product }) {
   }
 
   return (
-    <article className='product'>
-      <a href='#'>
-        <img src={image} alt={title} />
+    <article className="product">
+      <a href="#">
+        <img src={image_url} alt={title} />
       </a>
       <h1>{title}</h1>
-      <span>{price}</span>
+      <span>R$ {price}</span>
       <button onClick={addToCart}>Adicionar ao carrinho</button>
     </article>
   );
 }
-
-/*
-Adicionar ao carrinho 
-->
-Reservar temporariamente o item adicionado (remover um na quantidade do item no database)
-->
-
-
-*/
