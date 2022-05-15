@@ -20,7 +20,6 @@ function Home() {
 
   const { products, setProducts } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
-  console.log(products);
 
   useEffect(() => {
     const URL = process.env.REACT_APP_API_URL;
@@ -29,7 +28,6 @@ function Home() {
       .then((response) => {
         const dbProducts = response.data;
         setProducts(dbProducts);
-        setCart(dbProducts.map((product) => ({ ...product, volume: 1 })));
         setCategories(dbProducts.map((product) => product.category));
       })
       .catch((err) => {
@@ -92,10 +90,11 @@ function Home() {
           <div className="cart-box">
             <FaShoppingCart className="cart-close" onClick={toggleCart} />
             {cart.map((product, index) => {
+              console.log(cart);
               return (
                 <div key={index} className="cart-item">
                   <span>{product.title}</span>
-                  <span>{product.price}</span>
+                  <span>R$ {product.price}</span>
                   <span>{product.volume} unidade(s)</span>
                 </div>
               );

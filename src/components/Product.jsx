@@ -10,13 +10,16 @@ export default function Product({ product }) {
   const { cart, setCart } = useContext(CartContext);
 
   function addToCart() {
-    const newCart = cart.map((item) => {
-      if (item._id === _id) {
-        return { ...item, volume: item.volume + 1 };
-      }
-      return item;
-    });
-    setCart(newCart);
+    console.log('adding');
+    const newItem = { _id, title, price, image_url, volume: 1 };
+
+    const index = cart.findIndex((item) => item._id === _id);
+
+    if (index !== -1) cart[index].volume++;
+    else cart.push(newItem);
+
+    console.log(cart);
+    setCart([...cart]);
   }
 
   return (
