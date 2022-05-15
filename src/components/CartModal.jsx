@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -11,6 +12,7 @@ dotenv.config();
 export default function CartModal({ cartModal, toggleCart }) {
   const { cart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
+  const navigate = useNavigate();
   let total = 0;
 
   function purchase() {
@@ -23,11 +25,32 @@ export default function CartModal({ cartModal, toggleCart }) {
       })
       .then((response) => {
         //! Aqui verificou que esta logado !
-        alert('Concluindo Compra ...');
+        const items = cart.map((item) => {
+          console.log(item);
+          delete item.image_url;
+          delete item.price;
+          delete item.title;
+
+          return item;
+        });
+        console.log(items);
+        axios
+          .post(
+            `${URL}/session/purchase`,
+            { items, amount: total },
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => alert('Compra concluida'))
+          .catch((err) => alert('ERRO !'));
       })
       .catch((err) => {
         //! Aqui verificou que nao esta logado !
         alert('Voce precisa logar pra continuar !');
+        navigate('/signin');
       });
   }
 

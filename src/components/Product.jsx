@@ -42,7 +42,12 @@ export default function Product({ product, products, setProducts }) {
       </a>
       <h1>{title}</h1>
       <span>R$ {price}</span>
-      <button onClick={addToCart}>Adicionar ao carrinho</button>
+      <button
+        className={inventory === 0 ? 'disabled' : undefined}
+        onClick={addToCart}
+      >
+        Adicionar ao carrinho
+      </button>
     </article>
   );
 }
