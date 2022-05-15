@@ -39,17 +39,12 @@ export default function CartModal({ cartModal, toggleCart }) {
           );
         })}
         <span>Total: R${total}</span>
-        <button onClick={purchase}>Close Purchase</button>
+        <button onClick={closePurchase}>Close Purchase</button>
       </div>
     );
 
-    function purchase() {
-      const URL = `${process.env.API_URL}/sessions`;
-      axios.get(URL, CONFIG).then(closePurchase).catch(handleError);
-    }
-
-    function closePurchase(_res) {
-      const URL = `${process.env.API_URL}/session/purchase`;
+    function closePurchase() {
+      const URL = `http://localhost:5000/api/session/purchase`;
       const items = cart.map((item) => {
         delete item.image_url;
         delete item.price;
@@ -59,24 +54,9 @@ export default function CartModal({ cartModal, toggleCart }) {
       });
       const body = { items, amount: total };
 
-      axios
-        .post(URL, body, CONFIG)
-        .then(handleSuccessfulPurchase)
-        .catch(handleErrorDuringPurchase);
+      axios.post(URL, body, CONFIG).then(handleSuccess).catch(handleError);
 
-      function handleErrorDuringPurchase(err) {
-        confirmAlert({
-          message: `${err.response.data.message}. Please try again.`,
-          buttons: [
-            {
-              label: 'OK',
-              onClick: () => null,
-            },
-          ],
-        });
-      }
-
-      function handleSuccessfulPurchase(_res) {
+      function handleSuccess(_res) {
         confirmAlert({
           message: `Purchase successful!`,
           buttons: [
@@ -87,19 +67,19 @@ export default function CartModal({ cartModal, toggleCart }) {
           ],
         });
       }
-    }
 
-    function handleError(err) {
-      confirmAlert({
-        message: `You must be signed in to make a purchase`,
-        buttons: [
-          {
-            label: 'OK',
-            onClick: () => null,
-          },
-        ],
-      });
-      console.log(err);
+      function handleError(err) {
+        confirmAlert({
+          message: `${err.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => null,
+            },
+          ],
+        });
+        console.log(err);
+      }
     }
   }
 
