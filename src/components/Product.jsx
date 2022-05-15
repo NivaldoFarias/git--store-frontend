@@ -5,13 +5,26 @@ import CartContext from './../hooks/CartContext';
 
 dotenv.config();
 
-export default function Product({ product }) {
-  const { image_url, title, price, _id } = product;
+export default function Product({ product, products, setProducts }) {
+  let { image_url, title, price, _id, inventory } = product;
   const { cart, setCart } = useContext(CartContext);
 
   function addToCart() {
     console.log('adding');
     const newItem = { _id, title, price, image_url, volume: 1 };
+
+    if (inventory < 1) {
+      alert('Produto sem estoque');
+      return;
+    }
+
+    setProducts(
+      products.map((prod) => {
+        if (prod._id === _id) prod.inventory--;
+        return prod;
+      })
+    );
+    console.log(inventory);
 
     const index = cart.findIndex((item) => item._id === _id);
 

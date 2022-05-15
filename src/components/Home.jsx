@@ -82,7 +82,14 @@ function Home() {
         <div className="products">
           {products ? (
             products.map((product, index) => {
-              return <Product key={index} product={product} />;
+              return (
+                <Product
+                  key={index}
+                  product={product}
+                  products={products}
+                  setProducts={setProducts}
+                />
+              );
             })
           ) : (
             <></>
