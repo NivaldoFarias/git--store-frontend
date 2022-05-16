@@ -332,6 +332,7 @@
       font-weight: bold !important;
       font-family: $code-font !important;
     }
+
     header::after {
       content: '';
       display: block;
@@ -581,6 +582,7 @@
         @include flex(row, space-between, center, initial);
         min-height: 50px;
         width: 100%;
+        margin: 0 !important;
         background-color: rgb(26, 35, 50);
         border-radius: 5px 5px 0 0;
         border: #fff solid 2px;
