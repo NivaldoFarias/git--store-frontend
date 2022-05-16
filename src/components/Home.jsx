@@ -14,7 +14,7 @@ import Product from './Product';
 import CartModal from './CartModal';
 import Shell from './Shell';
 
-import banner from './../assets/git-commands-alt.png';
+import banner from './../assets/git-commands.png';
 import logo from './../assets/git--store-logo.png';
 
 function Home() {
