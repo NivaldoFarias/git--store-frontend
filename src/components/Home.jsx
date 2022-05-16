@@ -7,6 +7,8 @@ import { FiUser } from 'react-icons/fi';
 
 import ProductsContext from './../hooks/ProductsContext';
 import getRandomInt from './../utils/getRandomInt';
+import CartContext from '../hooks/CartContext';
+import TokenContext from '../hooks/TokenContext';
 
 import Product from './Product';
 import CartModal from './CartModal';
@@ -20,11 +22,13 @@ function Home() {
   const [cartModal, setCartModal] = useState(false);
 
   const { products, setProducts } = useContext(ProductsContext);
+  const { setCart } = useContext(CartContext);
+  const { token } = useContext(TokenContext);
 
   useEffect(() => {
-    const URL = `http://localhost:5000/api/products`;
+    const URL = `http://localhost:5000/api`;
     axios
-      .get(URL)
+      .get(`${URL}/products`)
       .then((response) => {
         const dbProducts = response.data;
         setProducts(dbProducts);
@@ -32,7 +36,18 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    axios
+      .get(`${URL}/session/cart`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const dbCart = response.data;
+        setCart(dbCart);
+      });
+    // eslint-disable-next-line,  react-hooks/exhaustive-deps
   }, []);
 
   function buildHomePage() {

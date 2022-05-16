@@ -1,15 +1,36 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
+import axios from 'axios';
+import dotenv from 'dotenv';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
+import TokenContext from '../hooks/TokenContext';
+
+dotenv.config();
 
 export default function Product({ product }) {
   let { image_url, title, price, _id, inventory, shell_id } = product;
   const [btnClick, setBtnClick] = useState(false);
   const { cart, setCart } = useContext(CartContext);
+  const { token } = useContext(TokenContext);
   const { products, setProducts } = useContext(ProductsContext);
+
+  function cartReq() {
+    const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
+    axios
+      .put(URL, cart, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => console.log('ENVIADO AO DB'))
+      .catch((e) => console.log(e));
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(cartReq, [cart]);
 
   function buildProduct() {
     const btnClass = btnClick ? 'styled-btn clicked' : 'styled-btn';
