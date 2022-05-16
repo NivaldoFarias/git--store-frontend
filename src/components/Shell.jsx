@@ -42,6 +42,9 @@ function Shell({ closeModal }) {
       status: () => {
         setLineType((prevState) => [...prevState, 'status']);
       },
+      help: () => {
+        setLineType((prevState) => [...prevState, 'help']);
+      },
     };
 
     return (

@@ -82,12 +82,12 @@ function CommandLine(props) {
 
   return (
     <>
-      {body()}
+      {commands()}
       <div className="command-line">{commandLine}</div>
     </>
   );
 
-  function body() {
+  function commands() {
     if (output === 'unknown') {
       return (
         <div className="command-line">
@@ -97,15 +97,40 @@ function CommandLine(props) {
     } else if (output === 'status') {
       return (
         <>
-          {cart.map((item, index) => {
-            return (
-              <div key={index} className="command-line">
-                <span className="lesser-text">
-                  &nbsp;{item.title} ({item.volume})<br />
-                </span>
-              </div>
-            );
-          })}
+          {cart.length > 0 ? (
+            cart.map((item, index) => {
+              return (
+                <div key={index} className="command-line">
+                  <span className="lesser-text">
+                    &nbsp;{item.title} ({item.volume})
+                  </span>
+                </div>
+              );
+            })
+          ) : (
+            <div className="command-line">
+              <span className="lesser-text">&nbsp;Your cart is empty</span>
+            </div>
+          )}
+        </>
+      );
+    } else if (output === 'help') {
+      return (
+        <>
+          <div className="command-line">
+            <span className="lesser-text">&nbsp;add (id) - add a product</span>
+          </div>
+          <div className="command-line">
+            <span className="lesser-text">
+              &nbsp;rm (id) - remove a product
+            </span>
+          </div>
+          <div className="command-line">
+            <span className="lesser-text">&nbsp;status - log cart</span>
+          </div>
+          <div className="command-line">
+            <span className="lesser-text">&nbsp;commit - finish purchase</span>
+          </div>
         </>
       );
     } else return null;
