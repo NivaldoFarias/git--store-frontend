@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function CommandLine(props) {
   const { updateShell, availableCommands, output } = props;
   const [input, setInput] = useState('');
   const [disabled, setDisabled] = useState(false);
   const functions = Object.keys(availableCommands);
+  const inputElement = useRef(null);
 
   useEffect(() => {
     if (output === 'clear') {
@@ -12,6 +13,12 @@ function CommandLine(props) {
       setDisabled(false);
     }
   }, [output]);
+
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }, []);
 
   function buildCommandLine() {
     return (
@@ -24,7 +31,12 @@ function CommandLine(props) {
         <input
           type="text"
           className="command-line__input-field user-text"
-          autoFocus={true}
+          ref={(inputElement) => {
+            // constructs a new function on each render
+            if (inputElement) {
+              inputElement.focus();
+            }
+          }}
           maxLength={24}
           onChange={handleChange}
           onKeyDown={handleCommand}
@@ -42,7 +54,7 @@ function CommandLine(props) {
       if (e.code === 'Enter' && input !== '') {
         const commandLine = input.split(' ');
         e.target.blur();
-        setDisabled(true);
+
         if (commandLine[0] === 'git') {
           const command = commandLine[1];
           const commandTargets = commandLine.slice(2);

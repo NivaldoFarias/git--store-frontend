@@ -78,7 +78,7 @@ export default function Product({ product }) {
         if (index !== -1) {
           cart[index].volume++;
           setCart([...cart]);
-        } else setCart([...cart, newItem]);
+        } else setCart((prevState) => [...prevState, newItem]);
         setBtnClick(false);
       }, 400);
     }
