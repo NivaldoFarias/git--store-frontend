@@ -4,12 +4,15 @@ import { confirmAlert } from 'react-confirm-alert';
 import Typewriter from 'typewriter-effect';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import validateEmail from './../utils/validateEmail.js';
 import getRandomInt from './../utils/getRandomInt.js';
 import TokenContext from './../hooks/TokenContext';
 
 import logo from './../assets/git--store-logo.png';
+
+dotenv.config();
 
 function Signin() {
   const [signinData, setSigninData] = useState({
@@ -102,12 +105,13 @@ function Signin() {
     }
 
     function handleSignin() {
-      const URL = `${process.env.API_URL}/auth/sign-in`;
+      const URL = process.env.REACT_APP_API_URL;
+      console.log(URL);
       const body = {
         email: signinData.email,
         password: signinData.password,
       };
-      const request = axios.post(URL, body);
+      const request = axios.post(`${URL}/auth/sign-in`, body);
 
       request.then((response) => {
         setToken(response.data);

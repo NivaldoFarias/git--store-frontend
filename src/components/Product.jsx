@@ -69,8 +69,10 @@ export default function Product({ product }) {
         })
       );
       const index = cart.findIndex((item) => item.product_id === _id);
-      if (index !== -1) setCart([...cart, cart[index].volume++]);
-      else setCart([...cart, newItem]);
+      if (index !== -1) {
+        cart[index].volume++;
+        setCart([...cart]);
+      } else setCart([...cart, newItem]);
     }
   }
 
