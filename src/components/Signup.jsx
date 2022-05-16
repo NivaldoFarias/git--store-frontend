@@ -128,7 +128,7 @@ function Signup() {
     }
 
     function handleSignup() {
-      const URL = `${process.env.API_URL}/auth/sign-up`;
+      const URL = `${process.env.REACT_APP_API_URL}/auth/sign-up`;
       const body = {
         name: signupData.name,
         email: signupData.email,
