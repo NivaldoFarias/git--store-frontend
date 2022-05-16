@@ -1,6 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import { IoChevronUpSharp } from 'react-icons/io5';
 
 import ProductsContext from './../hooks/ProductsContext';
@@ -41,7 +39,9 @@ function Shell({ closeModal }) {
           console.log(`Removed ${product.title} from the list`);
         }
       },
-      status: () => {},
+      status: () => {
+        setLineType((prevState) => [...prevState, 'status']);
+      },
     };
 
     return (
@@ -97,9 +97,9 @@ function Shell({ closeModal }) {
           if (item.product_id === product._id) item.volume++;
           return item;
         });
-        setCart(newCart);
+        setCart([...newCart]);
       } else if (temp === product.shell_id) {
-        setCart([...cart, newItem]);
+        setCart((prevState) => [...prevState, newItem]);
       } else setCart((prevState) => [...prevState, newItem]);
     }
 

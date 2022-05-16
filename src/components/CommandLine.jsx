@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import CartContext from './../hooks/CartContext';
 
 function CommandLine(props) {
   const { updateShell, availableCommands, output } = props;
@@ -7,10 +8,14 @@ function CommandLine(props) {
   const functions = Object.keys(availableCommands);
   const inputElement = useRef(null);
 
+  const { cart } = useContext(CartContext);
+
   useEffect(() => {
     if (output === 'clear') {
       setInput('');
       setDisabled(false);
+    } else if (output === 'status') {
+      setInput('');
     }
   }, [output]);
 
@@ -77,14 +82,34 @@ function CommandLine(props) {
 
   return (
     <>
-      {output === 'unknown' ? (
-        <div className="command-line">
-          <span className="lesser-text">Command not found</span>
-        </div>
-      ) : null}
+      {body()}
       <div className="command-line">{commandLine}</div>
     </>
   );
+
+  function body() {
+    if (output === 'unknown') {
+      return (
+        <div className="command-line">
+          <span className="lesser-text">Command not found</span>
+        </div>
+      );
+    } else if (output === 'status') {
+      return (
+        <>
+          {cart.map((item, index) => {
+            return (
+              <div key={index} className="command-line">
+                <span className="lesser-text">
+                  &nbsp;{item.title} ({item.volume})<br />
+                </span>
+              </div>
+            );
+          })}
+        </>
+      );
+    } else return null;
+  }
 }
 
 export default CommandLine;
