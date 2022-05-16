@@ -88,6 +88,9 @@ function Signin() {
             ></div>
           </button>
           <Link to="/signup">config new user</Link>
+          <Link className="home-btn" to="/">
+            Home
+          </Link>
         </form>
       </>
     );

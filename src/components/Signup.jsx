@@ -108,7 +108,10 @@ function Signup() {
               className={hasSubmitted ? 'dot-pulse' : 'dot-pulse hidden'}
             ></div>
           </button>
-          <Link to="/">sign-in user</Link>
+          <Link to="/signin">sign-in user</Link>
+          <Link className="home-btn" to="/">
+            Home
+          </Link>
         </form>
       </>
     );

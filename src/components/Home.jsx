@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 import axios from 'axios';
 
@@ -16,6 +17,7 @@ import Shell from './Shell';
 
 import banner from './../assets/git-commands-alt.png';
 import logo from './../assets/git--store-logo.png';
+import { Navigate } from 'react-router-dom';
 
 function Home() {
   const [shellModal, setShellModal] = useState(false);
@@ -24,6 +26,8 @@ function Home() {
   const { products, setProducts } = useContext(ProductsContext);
   const { setCart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const URL = process.env.REACT_APP_API_URL;
@@ -84,7 +88,7 @@ function Home() {
         </div>
         <CartModal cartModal={cartModal} toggleCart={toggleCart} />
         <footer>
-          <FiUser className="action-icon user-icon" />
+          <FiUser className="action-icon user-icon" onClick={openSignIn} />
           <div className="split-bar"></div>
           <RiTerminalFill
             className="action-icon terminal-icon"
@@ -115,6 +119,10 @@ function Home() {
 
     function openModal() {
       setShellModal(true);
+    }
+
+    function openSignIn() {
+      navigate('/signin');
     }
 
     function closeModal() {
