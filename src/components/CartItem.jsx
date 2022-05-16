@@ -24,6 +24,7 @@ function CartItem({ product }) {
   }, [volume]);
 
   function cartReq() {
+    if (!token) return;
     const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
     axios
       .put(URL, cart, {
@@ -89,7 +90,9 @@ function CartItem({ product }) {
         />
         <button onClick={addOne}>+</button>
       </div>
-      <span>subtotal - R$ {(price * quantity).toFixed(2)}</span>
+      <span>
+        subtotal - R$ {quantity === '' ? '0' : (price * quantity).toFixed(2)}
+      </span>
     </div>
   );
 }
