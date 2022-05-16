@@ -301,12 +301,17 @@
   @include flex(column, initial, center, initial);
   position: relative;
   padding: 0 14px;
-  height: 2000px;
   width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
 
   color: $primary;
   font-family: $default-font;
   background-color: $background;
+  background-image: url('/assets/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   header {
     @include flex(row, center, center, 15px);
@@ -321,9 +326,9 @@
       width: fit-content;
 
       color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      font-family: $code-font;
+      font-size: 1.2rem !important; 
+      font-weight: bold !important;
+      font-family: $code-font !important;
     }
     header::after {
       content: '';
@@ -441,10 +446,9 @@
   }
   .products {
     @include flex(column, flex-start, center, 15px);
-    padding-top: 15px;
-    height: 1000px;
+    margin-top: 15px;
+    margin-bottom: 80px;
     width: 100%;
-    background-color: $background;
 
     .product {
       @include flex(column, initial, initial, initial);
@@ -457,6 +461,7 @@
       img {
         width: 120px;
         height: 120px;
+        margin-top: 5px;
       }
       a {
         width: 100%;
@@ -511,33 +516,151 @@
   }
   .cart-modal {
     @include flex(initial, center, center, initial);
-    position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
+    position: fixed;
     z-index: 5;
 
-    padding: 0 24px;
-    height: 100%;
+    
+    height: fit-content;
     width: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
 
-    &__container {
-      @include flex(column, center, center, initial);
-      position: relative;
-      height: 340px;
-      width: 340px;
+    &__total {
+      color: #000;
+      font-weight: 500;
+      font-size: 20px;
+    }
 
+    &__empty {
+      color: rgb(197, 197, 197);
+      font-weight: 500;
+      font-size: 30px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    &__purchase {
+      background-color: #408001;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        width: 80px;
+        min-height: 40px;
+        margin: 10px 0;
+        padding: 2px;
+
+        font-family: $code-font;
+        font-size: 16px;
+    }
+    
+
+    &__container {
+      @include flex(column, flex-start, center, initial);
+      overflow-y: scroll;
+      position: relative;
+      min-height: 400px;
+      height: fit-content;
+      max-height: 90vh;
+      width: 100%; 
       border-radius: 5px;
+      margin: 0 5px;
       background-color: white;
+
+      header {
+        @include flex(row, space-between, center, initial);
+        min-height: 50px;
+        width: 100%;
+        background-color: rgb(26, 35, 50);
+        border-radius: 5px 5px 0 0;
+        border: #fff solid 2px;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 0 10px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+
     }
     &__item {
-      width: 100%;
+      width: 95%;
+      height: fit-content;
       display: flex;
       flex-direction: column;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       margin: 10px 0;
+      padding: 20px 0;
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00447c;
+        margin: 0 0 20px 0;
+      }
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+
+      a {
+        width: 100%;
+        background-color: white;
+        border-radius: 5px 5px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 5px;
+        color: #000;
+
+        button, input {
+          width: 40px;
+          height: 40px;
+          border-radius: 5px;
+          border: 1px solid #dee2e6;
+        }
+
+        input {
+          width: 60px;
+          text-align: center;
+          font-size: 16px;
+        }
+
+        span {
+          font-size: 16px;
+          display: block;
+          width: 120px;
+        }
+        
+      }
+
+      span {
+        color: #000;
+        display: inline-block;
+        margin-top: 10px;
+      }
     }
+
     &__close {
       position: absolute;
       font-size: 30px;
