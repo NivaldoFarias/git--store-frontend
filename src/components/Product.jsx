@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -7,13 +7,15 @@ import CartContext from './../hooks/CartContext';
 
 export default function Product({ product }) {
   let { image_url, title, price, _id, inventory, shell_id } = product;
+  const [btnClick, setBtnClick] = useState(false);
   const { cart, setCart } = useContext(CartContext);
   const { products, setProducts } = useContext(ProductsContext);
 
   function buildProduct() {
+    const btnClass = btnClick ? 'styled-btn clicked' : 'styled-btn';
+    const balance = price.toFixed(2).toString().split('.');
     let amount = null;
     let cents = null;
-    const balance = price.toFixed(2).toString().split('.');
     if (balance) {
       if (price.balance * 1 === 0) {
         amount = '0,';
@@ -32,7 +34,8 @@ export default function Product({ product }) {
         <h1>{title}</h1>
         <div className="text-container">
           <p className="text-container__price">
-            <span>R$</span> {amount}
+            <span>R$</span>&nbsp;
+            {amount}
             <span>{cents}</span>
           </p>
           <p className="text-container__shell-id">
@@ -40,7 +43,7 @@ export default function Product({ product }) {
           </p>
         </div>
         <button
-          className={inventory === 0 ? 'disabled' : undefined}
+          className={inventory === 0 ? `${btnClass} disabled` : `${btnClass}`}
           onClick={addToCart}
         >
           git add {shell_id}
@@ -49,30 +52,34 @@ export default function Product({ product }) {
     );
 
     function addToCart() {
-      if (inventory < 1) {
-        return confirmAlert({
-          message: `Product not in stock, please try again.`,
-          buttons: [
-            {
-              label: 'OK',
-              onClick: () => null,
-            },
-          ],
-        });
-      }
+      setBtnClick(true);
 
-      const newItem = { product_id: _id, title, price, image_url, volume: 1 };
-      setProducts(
-        products.map((prod) => {
-          if (prod._id === _id) prod.inventory--;
-          return prod;
-        })
-      );
-      const index = cart.findIndex((item) => item.product_id === _id);
-      if (index !== -1) {
-        cart[index].volume++;
-        setCart([...cart]);
-      } else setCart([...cart, newItem]);
+      setTimeout(() => {
+        if (inventory < 1) {
+          return confirmAlert({
+            message: `Product not in stock, please try again.`,
+            buttons: [
+              {
+                label: 'OK',
+                onClick: () => null,
+              },
+            ],
+          });
+        }
+
+        const newItem = { product_id: _id, title, price, image_url, volume: 1 };
+        setProducts(
+          products.map((prod) => {
+            if (prod._id === _id) prod.inventory--;
+            return prod;
+          })
+        );
+        const index = cart.findIndex((item) => item.product_id === _id);
+        if (index !== -1) {
+          cart[index].volume++;
+          setCart([...cart]);
+        } else setCart([...cart, newItem]);
+      }, 400);
     }
   }
 
