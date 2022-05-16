@@ -41,6 +41,7 @@ function Home() {
         console.log(err);
       });
 
+    if (!token) return;
     axios
       .get(`${URL}/session/cart`, {
         headers: {

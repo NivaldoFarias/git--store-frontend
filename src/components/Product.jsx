@@ -18,6 +18,7 @@ export default function Product({ product }) {
   const { products, setProducts } = useContext(ProductsContext);
 
   function cartReq() {
+    if (!token) return;
     const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
     axios
       .put(URL, cart, {
