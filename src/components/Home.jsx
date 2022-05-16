@@ -14,7 +14,7 @@ import Product from './Product';
 import CartModal from './CartModal';
 import Shell from './Shell';
 
-import banner from './../assets/git-commands.png';
+import banner from './../assets/git-commands-alt.png';
 import logo from './../assets/git--store-logo.png';
 
 function Home() {
@@ -26,7 +26,7 @@ function Home() {
   const { token } = useContext(TokenContext);
 
   useEffect(() => {
-    const URL = `http://localhost:5000/api`;
+    const URL = process.env.REACT_APP_API_URL;
     axios
       .get(`${URL}/products`)
       .then((response) => {
@@ -47,7 +47,7 @@ function Home() {
         const dbCart = response.data;
         setCart(dbCart);
       });
-    // eslint-disable-next-line,  react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function buildHomePage() {
