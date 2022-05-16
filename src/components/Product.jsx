@@ -1,14 +1,34 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
+import axios from 'axios';
+import dotenv from 'dotenv';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import ProductsContext from './../hooks/ProductsContext';
 import CartContext from './../hooks/CartContext';
+import TokenContext from '../hooks/TokenContext';
+
+dotenv.config();
 
 export default function Product({ product }) {
   let { image_url, title, price, _id, inventory, shell_id } = product;
   const { cart, setCart } = useContext(CartContext);
+  const { token } = useContext(TokenContext);
   const { products, setProducts } = useContext(ProductsContext);
+
+  function cartReq() {
+    const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
+    axios
+      .put(URL, cart, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => console.log('ENVIADO AO DB'))
+      .catch((e) => console.log(e));
+  }
+
+  useEffect(cartReq, [cart]);
 
   function buildProduct() {
     let amount = null;
@@ -72,7 +92,9 @@ export default function Product({ product }) {
       if (index !== -1) {
         cart[index].volume++;
         setCart([...cart]);
-      } else setCart([...cart, newItem]);
+      } else {
+        setCart([...cart, newItem]);
+      }
     }
   }
 

@@ -1,13 +1,19 @@
 import { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import dotenv from 'dotenv';
 import { IoClose } from 'react-icons/io5';
 
 import CartContext from '../hooks/CartContext';
+import TokenContext from '../hooks/TokenContext';
+
+dotenv.config();
 
 export default function CartItem({ product }) {
   console.log(product);
   const { price, title, product_id, image_url } = product;
   let { volume } = product;
   const { cart, setCart } = useContext(CartContext);
+  const { token } = useContext(TokenContext);
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
@@ -18,24 +24,36 @@ export default function CartItem({ product }) {
     }
   }, [volume]);
 
+  function cartReq() {
+    const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
+    axios
+      .put(URL, cart, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => console.log('ENVIADO AO DB'))
+      .catch((e) => console.log(e));
+  }
+
   function addOne() {
-    setQuantity(quantity + 1);
-    volume = quantity;
+    volume = quantity + 1;
     const newCart = cart.map((item) => {
       if (item.product_id === product_id) item.volume++;
       return item;
     });
     setCart(newCart);
+    cartReq();
   }
 
   function subOne() {
-    setQuantity(quantity - 1);
-    volume = quantity;
+    volume = quantity - 1;
     const newCart = cart.map((item) => {
       if (item.product_id === product_id) item.volume--;
       return item;
     });
     setCart(newCart);
+    cartReq();
   }
 
   return (
@@ -67,6 +85,7 @@ export default function CartItem({ product }) {
               return item;
             });
             setCart(newCart);
+            cartReq();
           }}
         />
         <button onClick={addOne}>+</button>
