@@ -11,6 +11,7 @@ import Product from './Product';
 import CartModal from './CartModal';
 import Shell from './Shell';
 import logo from './../assets/git--store-logo.png';
+import getRandomInt from './../utils/getRandomInt';
 
 function Home() {
   const [shellModal, setShellModal] = useState(false);
@@ -44,10 +45,10 @@ function Home() {
             onInit={(typewriter) => {
               typewriter
                 .typeString('git --store')
-                .pauseFor(10000)
+                .pauseFor(5000)
                 .deleteAll()
                 .pauseFor(1000)
-                .typeString('open git shell')
+                .typeString(outputWriter())
                 .pauseFor(3000)
                 .deleteAll()
                 .start();
@@ -83,6 +84,17 @@ function Home() {
         </div>
       </>
     );
+
+    function outputWriter() {
+      const randomNumber = getRandomInt(1, 6);
+      if (randomNumber <= 3) {
+        return 'try git help';
+      } else if (randomNumber === 4) {
+        return 'try git status';
+      } else if (randomNumber === 5) {
+        return 'try git commit';
+      } else return 'open git shell';
+    }
 
     function openModal() {
       setShellModal(true);
