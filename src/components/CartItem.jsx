@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import { IoClose } from 'react-icons/io5';
 
 import CartContext from '../hooks/CartContext';
 
@@ -39,6 +40,13 @@ export default function CartItem({ product }) {
 
   return (
     <div className="cart-modal__item">
+      <IoClose
+        className="cart-modal__item__delete"
+        onClick={() => {
+          const newCart = cart.filter((item) => item.product_id !== product_id);
+          setCart(newCart);
+        }}
+      />
       <a href="#">
         <img src={image_url} alt={title} />
       </a>
@@ -52,7 +60,7 @@ export default function CartItem({ product }) {
           min="0"
           value={quantity}
           onChange={(e) => {
-            setQuantity(e.target.value);
+            setQuantity(parseInt(e.target.value));
             volume = quantity;
             const newCart = cart.map((item) => {
               if (item.product_id === product_id) item.volume = e.target.value;

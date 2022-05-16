@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
-import { FaShoppingCart } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -25,7 +24,9 @@ export default function CartModal({ cartModal, toggleCart }) {
   };
 
   function buildCartModal() {
-    let total = 0;
+    let total = cart
+      .reduce((acc, product) => acc + product.price * product.volume, 0)
+      .toFixed(2);
     const content = cart.length ? (
       <>
         {cart.map((product, index) => {
@@ -33,9 +34,7 @@ export default function CartModal({ cartModal, toggleCart }) {
         })}
         <span className="cart-modal__total">
           Total: R$
-          {cart
-            .reduce((acc, product) => acc + product.price * product.volume, 0)
-            .toFixed(2)}
+          {total}
         </span>
         <button className="cart-modal__purchase" onClick={closePurchase}>
           Checkout

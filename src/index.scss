@@ -604,12 +604,22 @@
       align-items: center;
       margin: 10px 0;
       padding: 20px 0;
+      position: relative;
+
+      &__delete {
+        color: #000;
+        font-size: 18px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
 
       h1 {
         font-size: 1.5rem;
         font-weight: bold;
         color: #00447c;
         margin: 0 0 20px 0;
+        text-align: center;
       }
 
       img {

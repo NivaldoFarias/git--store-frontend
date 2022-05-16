@@ -137,7 +137,7 @@ function Signup() {
       const request = axios.post(URL, body);
 
       request.then((_res) => {
-        navigate('/');
+        navigate('/signin');
       });
       request.catch((error) => {
         console.log(error);
