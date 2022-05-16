@@ -304,6 +304,7 @@
   width: 100%;
   min-width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 
   color: $primary;
   font-family: $default-font;
@@ -314,9 +315,10 @@
   background-attachment: fixed;
 
   header {
-    @include flex(row, center, center, 15px);
+    @include flex(row, flex-start, center, 15px);
     height: 70px;
     width: 100%;
+    margin-left: 50%;
 
     img {
       width: 35px;
@@ -380,7 +382,7 @@
     height: 160px;
     border-radius: 5px;
     background-image: url('https://cdn.hashnode.com/res/hashnode/image/upload/v1634077183553/TsDGLZu8O.jpeg');
-    background-size: contain;
+    background-size: cover;
   }
   nav {
     width: 100%;
