@@ -419,9 +419,8 @@
   .banner {
     width: 100%;
     height: 160px;
-    border-radius: 5px;
-    background-image: url('https://cdn.hashnode.com/res/hashnode/image/upload/v1634077183553/TsDGLZu8O.jpeg');
-    background-size: cover;
+    margin-left: 10px;
+    object-fit: cover;
   }
   nav {
     width: 100%;
@@ -487,7 +486,7 @@
   }
   .products {
     @include flex(column, flex-start, center, 30px);
-    margin: 30px 0 100px;
+    margin: 15px 0 100px;
     width: 100%;
 
     .product {
@@ -672,8 +671,6 @@
           font-size: 16px;
           display: block;
           width: 120px;
-        }
-        button {
         }
       }
       span {

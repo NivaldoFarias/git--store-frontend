@@ -6,12 +6,14 @@ import { RiTerminalFill, RiShoppingCartLine } from 'react-icons/ri';
 import { FiUser } from 'react-icons/fi';
 
 import ProductsContext from './../hooks/ProductsContext';
+import getRandomInt from './../utils/getRandomInt';
 
 import Product from './Product';
 import CartModal from './CartModal';
 import Shell from './Shell';
+
+import banner from './../assets/git-commands.png';
 import logo from './../assets/git--store-logo.png';
-import getRandomInt from './../utils/getRandomInt';
 
 function Home() {
   const [shellModal, setShellModal] = useState(false);
@@ -55,7 +57,7 @@ function Home() {
             }}
           />
         </header>
-        <div className="banner"></div>
+        <img src={banner} alt="git commands" className="banner" />
         <div className="products">
           {products ? (
             products.map((product, index) => {
