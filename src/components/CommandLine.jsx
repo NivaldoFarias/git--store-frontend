@@ -80,12 +80,7 @@ function CommandLine(props) {
 
   const commandLine = buildCommandLine();
 
-  return (
-    <>
-      {commands()}
-      <div className="command-line">{commandLine}</div>
-    </>
-  );
+  return <>{commands()}</>;
 
   function commands() {
     if (output === 'unknown') {
@@ -133,7 +128,7 @@ function CommandLine(props) {
           </div>
         </>
       );
-    } else return null;
+    } else return <div className="command-line">{commandLine}</div>;
   }
 }
 

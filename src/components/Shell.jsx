@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { IoChevronUpSharp } from 'react-icons/io5';
 
 import ProductsContext from './../hooks/ProductsContext';
+import TokenContext from './../hooks/TokenContext';
 import CartContext from './../hooks/CartContext';
 
 import CommandLine from './CommandLine';
@@ -9,6 +14,9 @@ import CommandLine from './CommandLine';
 function Shell({ closeModal }) {
   const [lineType, setLineType] = useState(['user']);
 
+  const navigate = useNavigate();
+
+  const { token } = useContext(TokenContext);
   const { products, setProducts } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
 
@@ -45,6 +53,7 @@ function Shell({ closeModal }) {
       help: () => {
         setLineType((prevState) => [...prevState, 'help']);
       },
+      commit: closePurchase,
     };
 
     return (
@@ -124,6 +133,80 @@ function Shell({ closeModal }) {
           return prod;
         })
       );
+    }
+
+    function closePurchase() {
+      let total = cart
+        .reduce((acc, product) => acc + product.price * product.volume, 0)
+        .toFixed(2);
+      const CONFIG = {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      };
+      const URL = process.env.REACT_APP_API_URL;
+      axios
+        .get(`${URL}/sessions`, CONFIG)
+        .then(handleUserOnline)
+        .catch(handleUserOffline);
+
+      function handleSuccess(_res) {
+        confirmAlert({
+          message: `Purchase successful!`,
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => {
+                setCart([]);
+              },
+            },
+          ],
+        });
+      }
+
+      function handleError(err) {
+        confirmAlert({
+          message: `${err.response.data.message}. Please try again.`,
+          buttons: [
+            {
+              label: 'OK',
+              onClick: () => null,
+            },
+          ],
+        });
+        console.log(err);
+      }
+
+      function handleUserOffline(_err) {
+        confirmAlert({
+          message: 'You must be signed in to purchase!',
+          buttons: [
+            {
+              label: 'Sign in',
+              onClick: () => navigate('/signin'),
+            },
+            {
+              label: 'Cancel',
+              onClick: () => null,
+            },
+          ],
+        });
+      }
+
+      function handleUserOnline(_res) {
+        const items = cart.map((item) => {
+          console.log(item);
+          delete item.image_url;
+          delete item.price;
+          delete item.title;
+
+          return item;
+        });
+        axios
+          .post(`${URL}/session/purchase`, { items, amount: total }, CONFIG)
+          .then(handleSuccess)
+          .catch(handleError);
+      }
     }
   }
 

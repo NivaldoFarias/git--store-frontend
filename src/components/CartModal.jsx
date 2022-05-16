@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 import { confirmAlert } from 'react-confirm-alert';
@@ -41,7 +41,7 @@ function CartModal({ cartModal, toggleCart }) {
         </button>
       </>
     ) : (
-      <div className="cart-modal__empty">Carrinho Vazio</div>
+      <div className="cart-modal__empty">Cart Empty</div>
     );
     return (
       <div className="cart-modal__container">
