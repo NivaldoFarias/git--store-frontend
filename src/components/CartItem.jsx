@@ -8,8 +8,7 @@ import TokenContext from '../hooks/TokenContext';
 
 dotenv.config();
 
-export default function CartItem({ product }) {
-  console.log(product);
+function CartItem({ product }) {
   const { price, title, product_id, image_url } = product;
   let { volume } = product;
   const { cart, setCart } = useContext(CartContext);
@@ -94,3 +93,5 @@ export default function CartItem({ product }) {
     </div>
   );
 }
+
+export default CartItem;
