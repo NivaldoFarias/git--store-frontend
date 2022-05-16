@@ -79,6 +79,7 @@ export default function Product({ product }) {
           cart[index].volume++;
           setCart([...cart]);
         } else setCart([...cart, newItem]);
+        setBtnClick(false);
       }, 400);
     }
   }

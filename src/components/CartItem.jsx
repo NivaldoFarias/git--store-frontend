@@ -3,7 +3,7 @@ import { IoClose } from 'react-icons/io5';
 
 import CartContext from '../hooks/CartContext';
 
-export default function CartItem({ product }) {
+function CartItem({ product }) {
   console.log(product);
   const { price, title, product_id, image_url } = product;
   let { volume } = product;
@@ -75,3 +75,5 @@ export default function CartItem({ product }) {
     </div>
   );
 }
+
+export default CartItem;

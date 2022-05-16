@@ -13,7 +13,7 @@ import TokenContext from './../hooks/TokenContext';
 
 dotenv.config();
 
-export default function CartModal({ cartModal, toggleCart }) {
+function CartModal({ cartModal, toggleCart }) {
   const { cart, setCart } = useContext(CartContext);
   const { token } = useContext(TokenContext);
   const navigate = useNavigate();
@@ -127,3 +127,5 @@ export default function CartModal({ cartModal, toggleCart }) {
     <div className={cartModal ? 'cart-modal' : 'hidden'}>{cartModalBody}</div>
   );
 }
+
+export default CartModal;
