@@ -60,10 +60,7 @@ function CommandLine(props) {
           const commandTargets = commandLine.slice(2);
 
           if (functions.includes(command)) {
-            const targets = commandTargets.filter(
-              (target, index, self) => self.indexOf(target) === index
-            );
-            availableCommands[command](targets);
+            availableCommands[command](commandTargets);
           }
           updateShell('user');
         } else if (commandLine[0] === 'clear') {

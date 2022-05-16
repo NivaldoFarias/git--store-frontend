@@ -4,7 +4,6 @@ import { IoClose } from 'react-icons/io5';
 import CartContext from '../hooks/CartContext';
 
 function CartItem({ product }) {
-  console.log(product);
   const { price, title, product_id, image_url } = product;
   let { volume } = product;
   const { cart, setCart } = useContext(CartContext);

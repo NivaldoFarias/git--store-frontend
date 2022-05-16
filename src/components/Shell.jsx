@@ -18,22 +18,24 @@ function Shell({ closeModal }) {
     const availableProducts = products.map((product) => product.shell_id);
     const availableCommands = {
       add: (targets) => {
+        let temp = null;
         for (const target of targets) {
           const product = products.find(
             (product) => product.shell_id === target
           );
           if (invalidTarget(product, target)) continue;
 
-          addToCart(product);
+          addToCart(product, temp);
           console.log(`Added ${product.title} to cart`);
+          temp = target;
         }
       },
       rm: (targets) => {
         for (const target of targets) {
-          const product = product.find(
+          const product = products.find(
             (product) => product.shell_id === target
           );
-          if (!cart.includes(target)) continue;
+          if (!cart.some((item) => product._id === item.product_id)) continue;
 
           removeFromCart(product);
           console.log(`Removed ${product.title} from the list`);
@@ -74,7 +76,7 @@ function Shell({ closeModal }) {
       return !availableProducts.includes(shell_id) || product.inventory < 1;
     }
 
-    function addToCart(product) {
+    function addToCart(product, temp) {
       const newItem = {
         product_id: product._id,
         title: product.title,
@@ -91,19 +93,26 @@ function Shell({ closeModal }) {
 
       const index = cart.findIndex((item) => item.product_id === product._id);
       if (index !== -1) {
-        cart[index].volume++;
-        setCart([...cart]);
+        const newCart = cart.map((item) => {
+          if (item.product_id === product._id) item.volume++;
+          return item;
+        });
+        setCart(newCart);
+      } else if (temp === product.shell_id) {
+        setCart([...cart, newItem]);
       } else setCart((prevState) => [...prevState, newItem]);
     }
 
     function removeFromCart(product) {
+      let newCart = [...cart];
       const index = cart.findIndex((item) => item.product_id === product._id);
+
       if (index !== -1) {
         cart[index].volume--;
         if (cart[index].volume === 0) {
-          cart.splice(index, 1);
+          newCart = cart.filter((item) => item.product_id !== product._id);
         }
-        setCart([...cart]);
+        setCart([...newCart]);
       }
 
       setProducts(
