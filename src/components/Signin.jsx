@@ -15,6 +15,7 @@ import logo from './../assets/git--store-logo.png';
 dotenv.config();
 
 function Signin() {
+  const [homeBtn, setHomeBtn] = useState(false);
   const [signinData, setSigninData] = useState({
     email: '',
     password: '',
@@ -89,7 +90,7 @@ function Signin() {
           </button>
           <Link to="/signup">config new user</Link>
           <Link className="home-btn" to="/">
-            Home
+            &gt;&gt;HOME
           </Link>
         </form>
       </>

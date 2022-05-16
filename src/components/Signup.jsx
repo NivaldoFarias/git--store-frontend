@@ -110,7 +110,7 @@ function Signup() {
           </button>
           <Link to="/signin">sign-in user</Link>
           <Link className="home-btn" to="/">
-            Home
+            &gt;&gt;HOME
           </Link>
         </form>
       </>

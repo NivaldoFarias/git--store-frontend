@@ -25,9 +25,9 @@
   }
 
   .home-btn {
-    width: 150px;
-    text-align: center;
     @include flex(initial, center, center, initial);
+    text-align: center;
+    width: 150px;
     height: 40px;
 
     font-size: 1.4em;
@@ -36,8 +36,7 @@
 
     border: none;
     cursor: pointer;
-    background-color: rgb(238, 38, 35);
-    border-radius: 5px;
+    background-color: transparent;
 
     &:hover {
       filter: brightness(1.3);
