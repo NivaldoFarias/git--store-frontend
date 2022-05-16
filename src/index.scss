@@ -163,20 +163,33 @@
     }
   }
 }
-.modal-portal {
-  position: relative;
-  .modal {
+.shell-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &.collapsed {
+    background-color: transparent;
+
+    .shell {
+      height: 0 !important;
+    }
+  }
+  .shell {
     @include flex(column, initial, center, 0px);
     position: absolute;
     top: 0;
     left: 0;
 
-    min-height: 250px;
+    height: 250px;
     min-width: 100vw;
 
     color: $primary;
 
-    opacity: 0.85;
+    opacity: 0.9;
     outline: none;
     overflow: hidden;
     background-color: transparent;
@@ -245,14 +258,6 @@
       border-bottom-right-radius: 8px;
       background-color: $secondary;
     }
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.75);
   }
 }
 .styled-btn {

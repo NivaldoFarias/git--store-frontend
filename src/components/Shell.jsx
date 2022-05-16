@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
-import Modal from 'react-modal';
 import { IoChevronUpSharp } from 'react-icons/io5';
 
 import CartContext from './../hooks/CartContext';
-
 import CommandLine from './CommandLine';
 
-function Shell() {
+function Shell({ closeModal }) {
   const [lineType, setLineType] = useState(['user']);
-  const [modalIsOpen, setIsOpen] = useState(false);
   const { cart, setCart } = useContext(CartContext);
 
   function buildShell() {
@@ -38,34 +35,21 @@ function Shell() {
 
     return (
       <>
-        <Modal
-          className="modal"
-          portalClassName="modal-portal"
-          overlayClassName="overlay"
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          ariaHideApp={false}
-        >
-          <div className="command-shell">
-            {lineType.map((type, index) => {
-              return (
-                <CommandLine
-                  key={index}
-                  updateShell={updateShell}
-                  output={type}
-                  availableCommands={availableCommands}
-                />
-              );
-            })}
-          </div>
-          <div className="footer-bar">
-            <IoChevronUpSharp
-              className="close-modal-btn"
-              onClick={closeModal}
-            />
-          </div>
-        </Modal>
-        <button onClick={openModal}>open</button>
+        <div className="command-shell">
+          {lineType.map((type, index) => {
+            return (
+              <CommandLine
+                key={index}
+                updateShell={updateShell}
+                output={type}
+                availableCommands={availableCommands}
+              />
+            );
+          })}
+        </div>
+        <div className="footer-bar">
+          <IoChevronUpSharp className="close-modal-btn" onClick={closeModal} />
+        </div>
       </>
     );
 
@@ -76,19 +60,11 @@ function Shell() {
         setLineType((prevState) => [...prevState, type]);
       }
     }
-
-    function openModal() {
-      setIsOpen(true);
-    }
-
-    function closeModal() {
-      setIsOpen(false);
-    }
   }
 
   const shell = buildShell();
 
-  return <div className="terminal-shell">{shell}</div>;
+  return <div className="shell">{shell}</div>;
 }
 
 export default Shell;

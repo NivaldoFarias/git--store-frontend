@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import Typewriter from 'typewriter-effect';
+import axios from 'axios';
 
 import { RiTerminalFill, RiShoppingCartLine } from 'react-icons/ri';
 import { FiUser } from 'react-icons/fi';
-import { FaBars } from 'react-icons/fa';
 
 import ProductsContext from './../hooks/ProductsContext';
 
 import Product from './Product';
 import CartModal from './CartModal';
+import Shell from './Shell';
 import logo from './../assets/git--store-logo.png';
 
 function Home() {
-  const [sideBar, setSideBar] = useState(false);
+  const [shellModal, setShellModal] = useState(false);
   const [cartModal, setCartModal] = useState(false);
-  const [categories, setCategories] = useState();
 
   const { products, setProducts } = useContext(ProductsContext);
 
@@ -26,7 +25,6 @@ function Home() {
       .then((response) => {
         const dbProducts = response.data;
         setProducts(dbProducts);
-        setCategories(dbProducts.map((product) => product.category));
       })
       .catch((err) => {
         console.log(err);
@@ -70,18 +68,28 @@ function Home() {
         <footer>
           <FiUser className="action-icon user-icon" />
           <div className="split-bar"></div>
-          <RiTerminalFill className="action-icon terminal-icon " />
+          <RiTerminalFill
+            className="action-icon terminal-icon"
+            onClick={openModal}
+          />
           <div className="split-bar"></div>
           <RiShoppingCartLine
             className="action-icon cart"
             onClick={toggleCart}
           />
         </footer>
+        <div className={shellModal ? 'shell-modal' : 'shell-modal collapsed'}>
+          <Shell closeModal={closeModal} />
+        </div>
       </>
     );
 
-    function toggleSideBar() {
-      setSideBar(!sideBar);
+    function openModal() {
+      setShellModal(true);
+    }
+
+    function closeModal() {
+      setShellModal(false);
     }
 
     function toggleCart() {
