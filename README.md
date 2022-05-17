@@ -18,8 +18,10 @@
     <a href="https://github.com/NivaldoFarias/git--store-backend#readme"><strong>Back end code»</strong></a>
 </div>
 
-<!-- ![Banner](https://github.com/NivaldoFarias/mywallet-project-front/blob/main/src/assets/zaprecall-showroom.png?raw=true)
- -->
+<br />
+
+![Banner](https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/assets/git--store-showroom.png?raw=true)
+
 <!-- ABOUT THE PROJECT -->
 
 <!--
