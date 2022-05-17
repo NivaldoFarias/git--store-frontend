@@ -30,7 +30,7 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const URL = process.env.REACT_APP_API_URL;
+    const URL = 'https://git--store.herokuapp.com/api';
     axios
       .get(`${URL}/products`)
       .then((response) => {

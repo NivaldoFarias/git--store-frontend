@@ -109,8 +109,7 @@ function Signin() {
     }
 
     function handleSignin() {
-      const URL = process.env.REACT_APP_API_URL;
-      console.log(URL);
+      const URL = 'https://git--store.herokuapp.com/api';
       const body = {
         email: signinData.email,
         password: signinData.password,

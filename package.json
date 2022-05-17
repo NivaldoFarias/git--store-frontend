@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@types/react-modal": "^3.13.1",
+    "bindings": "^1.5.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -46,6 +47,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "file-uri-to-path": "^2.0.0",
     "prettier": "^2.6.2",
     "sass": "^1.51.0"
   }

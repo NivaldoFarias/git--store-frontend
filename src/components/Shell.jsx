@@ -24,28 +24,48 @@ function Shell({ closeModal }) {
     const availableProducts = products.map((product) => product.shell_id);
     const availableCommands = {
       add: (targets) => {
-        let temp = null;
+        let newCart = [...cart];
         for (const target of targets) {
           const product = products.find(
             (product) => product.shell_id === target
           );
           if (invalidTarget(product, target)) continue;
+          const newItem = {
+            product_id: product._id,
+            title: product.title,
+            price: product.price,
+            image_url: product.image_url,
+            volume: 1,
+          };
 
-          addToCart(product, temp);
-          console.log(`Added ${product.title} to cart`);
-          temp = target;
+          const index = newCart.findIndex(
+            (element) => element.product_id === product._id
+          );
+          if (index !== -1) newCart[index].volume++;
+          else newCart.push(newItem);
         }
+        updateCart(newCart);
       },
       rm: (targets) => {
+        let newCart = [...cart];
         for (const target of targets) {
           const product = products.find(
             (product) => product.shell_id === target
           );
-          if (!cart.some((item) => product._id === item.product_id)) continue;
+          if (!newCart.some((item) => product._id === item.product_id))
+            continue;
 
-          removeFromCart(product);
-          console.log(`Removed ${product.title} from the list`);
+          const index = newCart.findIndex(
+            (item) => item.product_id === product._id
+          );
+          if (index !== -1) {
+            newCart[index].volume--;
+            if (cart[index].volume === 0) {
+              newCart = cart.filter((item) => item.product_id !== product._id);
+            }
+          }
         }
+        updateCart(newCart);
       },
       status: () => {
         setLineType((prevState) => [...prevState, 'status']);
@@ -88,51 +108,8 @@ function Shell({ closeModal }) {
       return !availableProducts.includes(shell_id) || product.inventory < 1;
     }
 
-    function addToCart(product, temp) {
-      const newItem = {
-        product_id: product._id,
-        title: product.title,
-        price: product.price,
-        image_url: product.image_url,
-        volume: 1,
-      };
-      setProducts(
-        products.map((prod) => {
-          if (prod._id === product._id) prod.inventory--;
-          return prod;
-        })
-      );
-
-      const index = cart.findIndex((item) => item.product_id === product._id);
-      if (index !== -1) {
-        const newCart = cart.map((item) => {
-          if (item.product_id === product._id) item.volume++;
-          return item;
-        });
-        setCart([...newCart]);
-      } else if (temp === product.shell_id) {
-        setCart((prevState) => [...prevState, newItem]);
-      } else setCart((prevState) => [...prevState, newItem]);
-    }
-
-    function removeFromCart(product) {
-      let newCart = [...cart];
-      const index = cart.findIndex((item) => item.product_id === product._id);
-
-      if (index !== -1) {
-        cart[index].volume--;
-        if (cart[index].volume === 0) {
-          newCart = cart.filter((item) => item.product_id !== product._id);
-        }
-        setCart([...newCart]);
-      }
-
-      setProducts(
-        products.map((prod) => {
-          if (prod._id === product._id) prod.inventory++;
-          return prod;
-        })
-      );
+    function updateCart(newCart) {
+      setCart([...newCart]);
     }
 
     function closePurchase() {
@@ -203,7 +180,11 @@ function Shell({ closeModal }) {
           return item;
         });
         axios
-          .post(`${URL}/session/purchase`, { items, amount: total }, CONFIG)
+          .post(
+            `https://git--store.herokuapp.com/api/session/purchase`,
+            { items, amount: total },
+            CONFIG
+          )
           .then(handleSuccess)
           .catch(handleError);
       }
