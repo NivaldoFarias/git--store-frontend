@@ -131,7 +131,7 @@ function Signup() {
     }
 
     function handleSignup() {
-      const URL = `${process.env.REACT_APP_API_URL}/auth/sign-up`;
+      const URL = `https://git--store.herokuapp.com/api/auth/sign-up`;
       const body = {
         name: signupData.name,
         email: signupData.email,

@@ -54,7 +54,7 @@ function CartModal({ cartModal, toggleCart }) {
     );
 
     function closePurchase() {
-      const URL = process.env.REACT_APP_API_URL;
+      const URL = 'https://git--store.herokuapp.com/api';
       axios
         .get(`${URL}/sessions`, CONFIG)
         .then(handleUserOnline)
@@ -114,7 +114,11 @@ function CartModal({ cartModal, toggleCart }) {
           return item;
         });
         axios
-          .post(`${URL}/session/purchase`, { items, amount: total }, CONFIG)
+          .post(
+            `https://git--store.herokuapp.com/api/session/purchase`,
+            { items, amount: total },
+            CONFIG
+          )
           .then(handleSuccess)
           .catch(handleError);
       }
