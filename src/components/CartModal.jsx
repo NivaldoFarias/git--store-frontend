@@ -54,7 +54,7 @@ function CartModal({ cartModal, toggleCart }) {
     );
 
     function closePurchase() {
-      const URL = 'https://git--store.herokuapp.com/api';
+      const URL = process.env.REACT_APP_API_URL;
       axios
         .get(`${URL}/sessions`, CONFIG)
         .then(handleUserOnline)
@@ -88,12 +88,12 @@ function CartModal({ cartModal, toggleCart }) {
         console.log(err);
       }
 
-      function handleUserOffline(err) {
+      function handleUserOffline(_err) {
         confirmAlert({
-          message: 'Voce precisa logar pra continuar !',
+          message: 'You must be signed in to purchase!',
           buttons: [
             {
-              label: 'login',
+              label: 'Sign in',
               onClick: () => navigate('/signin'),
             },
             {
@@ -104,7 +104,7 @@ function CartModal({ cartModal, toggleCart }) {
         });
       }
 
-      function handleUserOnline(response) {
+      function handleUserOnline(_res) {
         const items = cart.map((item) => {
           console.log(item);
           delete item.image_url;
@@ -115,7 +115,7 @@ function CartModal({ cartModal, toggleCart }) {
         });
         axios
           .post(
-            `https://git--store.herokuapp.com/api/session/purchase`,
+            `${process.env.REACT_APP_API_URL}/session/purchase`,
             { items, amount: total },
             CONFIG
           )

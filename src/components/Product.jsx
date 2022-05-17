@@ -19,7 +19,7 @@ export default function Product({ product }) {
 
   function cartReq() {
     if (!token) return;
-    const URL = `https://git--store.herokuapp.com/api/session/cart`;
+    const URL = `${process.env.REACT_APP_API_URL}/session/cart`;
     axios
       .put(URL, cart, {
         headers: {

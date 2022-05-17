@@ -2,6 +2,12 @@
 @import './sass/variables';
 @import './sass/mixins';
 
+main {
+  background-image: url('/assets/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 .auth-pages {
   @include flex(column, space-evenly, center, initial);
   padding: 20px 36px;
@@ -372,10 +378,6 @@
 
   overflow-x: hidden;
   background-color: $background;
-  background-image: url('/assets/background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 
   header {
     @include flex(row, center, center, 15px);
