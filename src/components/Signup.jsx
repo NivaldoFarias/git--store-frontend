@@ -137,7 +137,7 @@ function Signup() {
         email: signupData.email,
         password: signupData.password,
       };
-      const request = axios.post(URL, body);
+      const request = axios.post(`${URL}/auth/sign-up`, body);
 
       request.then((_res) => {
         navigate('/signin');
