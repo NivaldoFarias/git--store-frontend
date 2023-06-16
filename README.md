@@ -8,8 +8,7 @@ Web Development Project using React and Sass — Front end
 - [**SCSS code»**](https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/index.scss)
 - [**Back end code»**](https://github.com/NivaldoFarias/git--store-backend#readme)
 
-<!-- ABOUT THE PROJECT -->
-## Built With
+## Built with
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
@@ -24,7 +23,7 @@ In this section I included all Youtube content I used or refered to while studyi
 
 [![Youtube][youtube-shield]][youtube-url]
 
-<!-- CONTACT -->
+<!-- Contact -->
 ## Contact
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
